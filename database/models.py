@@ -10,7 +10,7 @@ class User(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     username = Column(String(40), unique=True, nullable=False)
     password_hash = Column(String(200), nullable=False)
-    created_at = Column(DateTime, default=datetime.now(), nullable=False)
+    created_at = Column(DateTime, default=datetime.now, nullable=False)
 
     rooms = relationship("Room", back_populates="creator")
     messages = relationship("Message", back_populates="user")
@@ -21,7 +21,7 @@ class Room(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(String(50), unique=True, nullable=False)
     created_by = Column(Integer, ForeignKey("users.id"), nullable=False)
-    created_at = Column(DateTime, default=datetime.now(), nullable=False)
+    created_at = Column(DateTime, default=datetime.now, nullable=False)
 
     creator = relationship("User", back_populates="rooms")
     messages = relationship("Messages", back_populates="room")
@@ -34,7 +34,7 @@ class Message(Base):
     content = Column(Text, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
-    created_at = Column(DateTime, default=datetime.now(), nullable=False)
+    created_at = Column(DateTime, default=datetime.now, nullable=False)
 
     user = relationship("User", back_populates="messages")
     room = relationship("Room", back_populates="messages")
