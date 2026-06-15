@@ -13,6 +13,7 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
     rooms = relationship("Room", back_populates="creator")
+    messages = relationship("Message", back_populates="user")
 
 
 class Room(Base):
