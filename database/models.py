@@ -11,3 +11,12 @@ class User(Base):
     username = Column(String(40), unique=True, nullable=False)
     password_hash = Column(String(200), nullable=False)
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
+
+
+class Room(Base):
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    name = Column(String(50), unique=True, nullable=False)
+    created_by = Column(Integer, ForeignKey("users.id"), nullable=False)
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
+
+    creator = relationship("User", back_populates="rooms")
