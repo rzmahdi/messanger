@@ -6,3 +6,4 @@ engine = create_engine(
     "sqlite:///database.db",
     connect_args={"check_same_thread": False}
 )
+SessionLocal = sessionmaker(engine, autoflush=False, autocommit=False)
