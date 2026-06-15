@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from database.database import Base, engine
 from contextlib import asynccontextmanager
-
+from routers import auth
 
 @asynccontextmanager
 async def life_span(app: FastAPI):
@@ -11,3 +11,4 @@ async def life_span(app: FastAPI):
     print("Application Stop!")
 
 app = FastAPI(lifespan=life_span)
+app.add_route(auth.router)
