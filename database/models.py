@@ -23,3 +23,16 @@ class Room(Base):
     created_at = Column(DateTime, default=datetime.now(), nullable=False)
 
     creator = relationship("User", back_populates="rooms")
+
+
+class Message(Base):
+    __tablename__ = "messages"
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    content = Column(Text, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
+    created_at = Column(DateTime, default=datetime.now(), nullable=False)
+
+    user = relationship("User", back_populates="messages")
+    room = relationship("Room", back_populates="messages")
