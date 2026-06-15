@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 
 @asynccontextmanager
-def life_span(app: FastAPI):
+async def life_span(app: FastAPI):
     print("Application Start!")
     Base.metadata.create_all(engine)
     yield
