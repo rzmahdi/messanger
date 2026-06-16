@@ -16,7 +16,7 @@ def register(request: UserCreateSchema, db: Session = Depends(get_db)):
         .first()
     )
 
-    if not existing_user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    if existing_user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
     return existing_user
