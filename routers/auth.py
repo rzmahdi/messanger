@@ -13,12 +13,12 @@ router = APIRouter()
 def register(request: UserCreateSchema, db: Session = Depends(get_db)):
     existing_user = (
         db.query(User)
-        .filter_by(username=request.username, password_hash=hash_password(request.password))
+        .filter_by(username=request.username)
         .first()
     )
-
     if existing_user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="user allready exists!")
+    
 
     new_user = User(username=request.username, password_hash=hash_password(request.password))
     db.add(new_user)
