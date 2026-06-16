@@ -7,6 +7,9 @@ class UserBaseSchema(BaseModel):
 class UserCreateSchema(UserBaseSchema):
     password: str
 
+class UserLoginSchema(UserBaseSchema):
+    password: str
+
 class UserResponseSchema(UserBaseSchema):
     id: int
     created_at: datetime
