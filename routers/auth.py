@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from database.schema import UserCreateSchema, UserResponseSchema
 from database.database import get_db
 from database.models import User
+from services.auth_service import hash_password
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
 def register(request: UserCreateSchema, db: Session = Depends(get_db)):
     existing_user = (
         db.query(User)
-        .filter_by(username=request.username, password_hash=request.password)
+        .filter_by(username=request.username, password_hash=hash_password(request.password))
         .first()
     )
 
