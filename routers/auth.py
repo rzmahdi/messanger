@@ -19,4 +19,8 @@ def register(request: UserCreateSchema, db: Session = Depends(get_db)):
     if existing_user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="user allready exists!")
 
-    return existing_user
+    new_user = User(username=request.username, password_hash=request.password)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
