@@ -1,6 +1,6 @@
 from pwdlib import PasswordHash
 from database.models import User
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from jose import jwt, JWTError
 from typing import Annotated
 from fastapi import Depends, HTTPException
@@ -32,7 +32,7 @@ def authenticate_user(username: str, password: str, db):
 
 
 def create_access_token(username: str, user_id: int, exp_delta: timedelta):
-    encode = {"sub": username, "id": user_id, "exp": datetime.now() + exp_delta}
+    encode = {"sub": username, "id": user_id, "exp": datetime.now(timezone.utc) + exp_delta}
     return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
