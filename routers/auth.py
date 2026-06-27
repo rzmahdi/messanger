@@ -35,7 +35,7 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Sessio
     user = authenticate_user(form_data.username, form_data.password, db)
     
     if user is None:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "username or password are wrong!")
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "username or password are wrong!")
     
     token = create_access_token(user.username, user.id, timedelta(minutes=20))
     return {"access_token": token, "token_type": "bearer"}
