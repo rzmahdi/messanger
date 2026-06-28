@@ -7,6 +7,10 @@ function check_password(password, confirm_password){
     return password === confirm_password
 }
 
+function show_notif(text){
+    register_notif_modal.classList.add("show");
+    register_notif_text.innerHTML = text;
+}
 
 register_form.addEventListener("submit", async (e)=>{
     e.preventDefault();
@@ -28,11 +32,9 @@ register_form.addEventListener("submit", async (e)=>{
         })
 
         if(response.ok){
-            register_notif_modal.classList.add("show");
-            register_notif_text.innerHTML = "User successfuly created✅";
+            show_notif("User successfuly created✅");
         }else if(response.status === 409){
-            register_notif_modal.classList.add("show");
-            register_notif_text.innerHTML = "User allready exists!❌";
+            show_notif("User allready exists!❌");
         }
     }else{
         passwords_not_match_span.classList.add("error");
