@@ -71,7 +71,11 @@ body{
     margin-top: 2rem;
 }
 
-.error{
+#passwords-not-match{
+    display: none;
+}
+#passwords-not-match.error{
+    display: block;
     color: red;
     font-weight: bold;
     animation: show_password_error .5s ease;
