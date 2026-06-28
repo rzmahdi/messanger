@@ -1,5 +1,5 @@
 const register_form = document.getElementById("register-form");
-
+const passwords_not_match_span = document.getElementById("passwords-not-match");
 
 function check_password(password, confirm_password){
     return password === confirm_password
@@ -13,6 +13,7 @@ register_form.addEventListener("submit", async (e)=>{
     const confirm_password = document.getElementById("register-confirm-password").value;
 
     if(check_password(password, confirm_password)){
+        passwords_not_match_span.classList.remove("error");
         const response = await fetch("/register", {
             method: "POST",
             headers: {
@@ -23,5 +24,7 @@ register_form.addEventListener("submit", async (e)=>{
                 password,
             })
         })
+    }else{
+        passwords_not_match_span.classList.add("error");
     }
 })
