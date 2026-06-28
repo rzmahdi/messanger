@@ -3,7 +3,13 @@ const passwords_not_match_span = document.getElementById("passwords-not-match");
 const register_empty_username_span = document.getElementById("register-empty-username");
 const register_notif_modal = document.getElementById("register-modal-overlay-notif");
 const register_notif_text = document.getElementById("register-notif-modal-text");
+const register_password_invalid_span = document.getElementById("register-password-invalid");
 
+
+function password_validation(password){
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+    return passwordRegex.test(password);
+}
 
 function check_password(password, confirm_password){
     return password === confirm_password
@@ -33,6 +39,13 @@ register_form.addEventListener("submit", async (e)=>{
         return
     }else{
         passwords_not_match_span.classList.remove("error");
+    }
+
+    if(!password_validation(password)){
+        register_password_invalid_span.classList.add("error");
+        return
+    }else{
+        register_password_invalid_span.classList.remove("error");
     }
 
 
