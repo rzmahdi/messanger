@@ -1,5 +1,7 @@
 const register_form = document.getElementById("register-form");
 const passwords_not_match_span = document.getElementById("passwords-not-match");
+const register_notif_modal = document.getElementById("register-modal-overlay-notif");
+const register_notif_text = document.getElementById("register-notif-modal-text");
 
 function check_password(password, confirm_password){
     return password === confirm_password
@@ -24,6 +26,14 @@ register_form.addEventListener("submit", async (e)=>{
                 password,
             })
         })
+
+        if(response.ok){
+            register_notif_modal.classList.add("show");
+            register_notif_text.innerHTML = "User successfuly created✅";
+        }else if(response.status === 409){
+            register_notif_modal.classList.add("show");
+            register_notif_text.innerHTML = "User allready exists!❌";
+        }
     }else{
         passwords_not_match_span.classList.add("error");
     }
