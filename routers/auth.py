@@ -12,7 +12,7 @@ from datetime import timedelta
 router = APIRouter()
 
 
-@router.post("/register", response_model=UserResponseSchema)
+@router.post("/register", status_code=status.HTTP_201_CREATED)
 def register(request: UserCreateSchema, db: Session = Depends(get_db)):
     existing_user = (
         db.query(User)
@@ -21,13 +21,11 @@ def register(request: UserCreateSchema, db: Session = Depends(get_db)):
     )
     if existing_user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="user allready exists!")
-    
 
     new_user = User(username=request.username, password_hash=hash_password(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
 
 
 @router.post("/login", response_model=Token)
