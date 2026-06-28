@@ -4,6 +4,10 @@ const register_empty_username_span = document.getElementById("register-empty-use
 const register_notif_modal = document.getElementById("register-modal-overlay-notif");
 const register_notif_text = document.getElementById("register-notif-modal-text");
 const register_password_invalid_span = document.getElementById("register-password-invalid");
+const register_close_notif_btn = document.getElementById("register-modal-notif-close-btn");
+
+
+register_close_notif_btn.addEventListener("click", close_notif);
 
 
 function password_validation(password){
@@ -18,6 +22,10 @@ function check_password(password, confirm_password){
 function show_notif(text){
     register_notif_modal.classList.add("show");
     register_notif_text.innerHTML = text;
+}
+
+function close_notif(){
+    register_notif_modal.classList.remove("show");
 }
 
 
@@ -64,5 +72,12 @@ register_form.addEventListener("submit", async (e)=>{
         show_notif("User successfuly created✅");
     }else if(response.status === 409){
         show_notif("User allready exists!❌");
+    }
+})
+
+
+register_notif_modal.addEventListener("click", (e)=>{
+    if(e.target === register_notif_modal){
+        close_notif();
     }
 })
