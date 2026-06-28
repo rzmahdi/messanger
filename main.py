@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from database.database import Base, engine, get_db
 from contextlib import asynccontextmanager
-from routers import auth
+from routers import auth, pages
 from services.auth_service import get_current_user
 
 @asynccontextmanager
@@ -13,6 +13,7 @@ async def life_span(app: FastAPI):
 
 app = FastAPI(lifespan=life_span)
 app.include_router(auth.router)
+app.include_router(pages.router)
 
 @app.get("/")
 def user(user: dict = Depends(get_current_user), db=Depends(get_db)):
