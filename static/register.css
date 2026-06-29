@@ -55,11 +55,20 @@ body{
     outline: none;
     border-radius: .3rem;
     background-color: transparent;
+    transition: all ease .2s;
+}
+
+#register-form input:focus{
+    border-bottom: 1px solid rgba(255, 255, 255);
 }
 #register-form input::placeholder{
     color: rgba(255, 255, 255, 0.6);
+    transition: all ease .2s;
 }
-
+#register-form input:focus::placeholder{
+    translate: 0 -14px;
+    font-size: 15px;
+}
 #register-form button{
     width: 80%;
     padding: .7rem;
