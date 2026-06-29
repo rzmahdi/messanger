@@ -62,8 +62,12 @@ body{
 }
 #login-form input::placeholder{
     color: rgba(255, 255, 255, 0.6);
+    transition: all ease .2s;
 }
-
+#login-form input:focus::placeholder{
+    translate: 0 -14px;
+    font-size: 15px;
+}
 #login-form button{
     width: 80%;
     padding: .7rem;
