@@ -41,6 +41,13 @@ login_form.addEventListener("submit", async (e)=>{
     if(response.ok){
         const data = await response.json();
         localStorage.setItem("access_token", data.access_token);
+
+        const user_response = await fetch("/me", {
+            headers: {
+                Authorization: `Bearer ${data.access_token}`
+            }
+        })
+        const user = await user_response.json();
         show_notif("Your Log in was successfull✅");
     }else if(response.status === 401){
         show_notif("Username or password are wrong!❌");
