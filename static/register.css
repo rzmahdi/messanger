@@ -78,6 +78,11 @@ body{
     border-radius: .3rem;
     color: white;
     margin-top: 2rem;
+    transition: all ease .2s;
+}
+#register-form button:hover{
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 #passwords-not-match, #register-empty-username, #register-password-invalid{
