@@ -13,3 +13,10 @@ def register_page(request: Request):
         request=request,
         name="register.html"
     )
+
+@router.get("/login")
+def login_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="login.html"
+    )
