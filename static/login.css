@@ -84,6 +84,16 @@ body{
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+#login-empty-username{
+    display: none;
+}
+#login-empty-username.error{
+    display: block;
+    color: red;
+    font-weight: bold;
+    animation: show_password_error .5s ease;
+}
+
 #login-modal-overlay-notif{
     display: none;
     position: fixed;
