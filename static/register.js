@@ -5,10 +5,18 @@ const register_notif_modal = document.getElementById("register-modal-overlay-not
 const register_notif_text = document.getElementById("register-notif-modal-text");
 const register_password_invalid_span = document.getElementById("register-password-invalid");
 const register_close_notif_btn = document.getElementById("register-modal-notif-close-btn");
+let register_status = false;
 
 
-register_close_notif_btn.addEventListener("click", close_notif);
+register_close_notif_btn.addEventListener("click", (e)=>{
+    close_notif();
+    redirect_to_home();
+});
 
+
+function redirect_to_home(){
+    window.location.href = "/";
+}
 
 function password_validation(password){
     const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
@@ -70,6 +78,8 @@ register_form.addEventListener("submit", async (e)=>{
 
     if(response.ok){
         show_notif("User successfuly created✅");
+        register_status = true;
+        localStorage.removeItem("access_token");
     }else if(response.status === 409){
         show_notif("User allready exists!❌");
     }
@@ -79,5 +89,7 @@ register_form.addEventListener("submit", async (e)=>{
 register_notif_modal.addEventListener("click", (e)=>{
     if(e.target === register_notif_modal){
         close_notif();
+        if(register_status)
+            redirect_to_home();
     }
 })
