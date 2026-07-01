@@ -3,8 +3,14 @@ const login_empty_username_span = document.getElementById("login-empty-username"
 const login_notif_modal = document.getElementById("login-modal-overlay-notif");
 const login_notif_text = document.getElementById("login-notif-modal-text");
 const login_close_notif_btn = document.getElementById("login-modal-notif-close-btn");
+let login_status = false;
 
-login_close_notif_btn.addEventListener("click", close_notif);
+login_close_notif_btn.addEventListener("click", (e)=>{
+    close_notif();
+
+    if(login_status)
+        redirect_to_home();
+});
 
 
 function show_notif(text){
@@ -53,6 +59,7 @@ login_form.addEventListener("submit", async (e)=>{
         })
         const user = await user_response.json();
         show_notif("Your Log in was successfull✅");
+        login_status = true;
     }else if(response.status === 401){
         show_notif("Username or password are wrong!❌");
     }
@@ -62,5 +69,9 @@ login_form.addEventListener("submit", async (e)=>{
 login_notif_modal.addEventListener("click", (e)=>{
     if(e.target === login_notif_modal){
         close_notif();
+    }
+    
+    if(login_status){
+        redirect_to_home();
     }
 })
