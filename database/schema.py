@@ -19,12 +19,12 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
-
 class RoomResponseSchema(BaseModel):
     id: int
     name: str
     created_by: int
     created_at: datetime
+    creator: UserBaseSchema
 
 class RoomCreateSchema(BaseModel):
     name: str
