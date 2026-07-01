@@ -1,6 +1,9 @@
 const display_username = document.getElementById("display-username");
 const rooms_container = document.getElementById("rooms-container");
 
+function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString();
+}
 
 async function check_login(){
     const token = localStorage.getItem("access_token");
@@ -45,7 +48,7 @@ async function display_rooms(){
                 <span>Created by ${room.creator.username}</span>
             </div>
 
-            <span class="room-date">${room.created_at}</span>
+            <span class="room-date">${formatDate(room.created_at)}</span>
     `;
 
     div.addEventListener("click", ()=>{
