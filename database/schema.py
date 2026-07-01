@@ -25,3 +25,6 @@ class RoomResponseSchema(BaseModel):
     name: str
     created_by: int
     created_at: datetime
+
+class RoomCreateSchema(BaseModel):
+    name: str
