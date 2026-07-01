@@ -69,9 +69,9 @@ login_form.addEventListener("submit", async (e)=>{
 login_notif_modal.addEventListener("click", (e)=>{
     if(e.target === login_notif_modal){
         close_notif();
+
+        if(login_status){
+           redirect_to_home();
     }
-    
-    if(login_status){
-        redirect_to_home();
     }
 })
