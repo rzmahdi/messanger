@@ -139,3 +139,16 @@ div.register-modal-notif-box button{
 div.register-modal-notif-box span{
     width: 85%;
 }
+
+#login-text{
+    margin-top: 3rem;
+    color: rgba(255, 255, 255, 0.726);
+}
+
+#login-link{
+    color: rgba(255, 255, 255, 0.726);
+}
+
+#login-link:hover{
+    color: orangered
+}
