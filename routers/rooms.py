@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Request, Depends
 from sqlalchemy.orm import Session
-from database.models import Room
-from database.schema import RoomResponseSchema
+from database.models import Room, User
+from database.schema import RoomResponseSchema, RoomCreateSchema
 from database.database import get_db
+from services.auth_service import get_current_user
 from typing import List
 
 router = APIRouter()
@@ -10,3 +11,11 @@ router = APIRouter()
 @router.get("/rooms", response_model=List[RoomResponseSchema])
 def retrive_rooms(request: Request, db: Session=Depends(get_db)):
     return db.query(Room).all()
+
+
+@router.post("/rooms", status_code=201)
+def create_room(request: RoomCreateSchema, user: User=Depends(get_current_user), db: Session=Depends(get_db)):
+    new_room = Room(name=request.name, created_by=user.get("id"))
+    db.add(new_room)
+    db.commit()
+    db.refresh(new_room)
