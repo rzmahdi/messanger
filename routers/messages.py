@@ -10,6 +10,9 @@ router = APIRouter()
 
 @router.get("/room/{room_id}/messages")
 def get_messages(room_id: int, limit: int = 20, offset: int = 0, db: Session=Depends(get_db)):
+    if not room_exist(room_id, db):
+        raise HTTPException(404, "Room does not exists!")
+    
     return(
         db.query(Message)
         .filter_by(room_id=room_id)
