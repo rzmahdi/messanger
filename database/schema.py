@@ -30,5 +30,13 @@ class RoomCreateSchema(BaseModel):
     name: str
 
 
+class MessageResponseSchema(BaseModel):
+    id: int
+    content: str
+    user_id: int
+    room_id: int
+    created_at: datetime
+    user: UserBaseSchema
+
 class MessageCreateSchema(BaseModel):
     content: str
