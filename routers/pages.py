@@ -27,3 +27,13 @@ def user(request: Request):
         request=request,
         name="index.html"
     )
+
+@router.get("/rooms/{room_id}")
+def room_page(room_id: int, request: Request):
+    return templates.TemplateResponse(
+        name="room.html",
+        request=request,
+        context={
+            "room_id": room_id
+        }
+    )
