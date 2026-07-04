@@ -22,3 +22,23 @@ class ConnectionManager:
         
         self.active_connections[room_id][user_id]["connections"].append(websocket)
         return is_first_connection
+
+
+    async def disconnect(self, room_id: int, user_id: int, websocket: WebSocket):
+        if room_id not in self.active_connections:
+            return
+
+        is_last_connection = False
+        connections = self.active_connections[room_id][user_id]["connections"]
+
+        connections.remove(websocket)
+
+        if(len(connections) == 0):
+            is_last_connection = True
+
+            del self.active_connections[room_id][user_id]
+
+            if not self.active_connections[room_id]:
+                del self.active_connections[room_id]
+
+        return is_last_connection
