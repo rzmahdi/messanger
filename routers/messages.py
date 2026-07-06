@@ -11,18 +11,22 @@ from typing import List
 router = APIRouter()
 
 @router.get("/room/{room_id}/messages", response_model=List[MessageResponseSchema])
-def get_messages(room_id: int, limit: int = 20, offset: int = 0, db: Session=Depends(get_db)):
+def get_messages(room_id: int, limit: int = 20, before_id: int | None=None, db: Session=Depends(get_db)):
     if not room_exist(room_id, db):
         raise HTTPException(404, "Room does not exists!")
     
-    return(
-        db.query(Message)
-        .filter_by(room_id=room_id)
-        .order_by(Message.id.desc())
+    query = db.query(Message).filter_by(room_id=room_id)
+    
+    if before_id:
+        query = query.filter(Message.id < before_id)
+
+    messages = (
+        query.order_by(Message.id.desc())
         .limit(limit)
-        .offset(offset)
         .all()
     )
+
+    return list(reversed(messages))
 
 
 @router.post("/room/{room_id}/messages", status_code=201)
