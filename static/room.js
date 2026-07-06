@@ -5,7 +5,6 @@ let oldest_message_id = null;
 const token = localStorage.getItem("access_token");
 
 
-
 function parseJwt(token){
     try {
         const base64Payload = token.split(".")[1];
