@@ -41,6 +41,10 @@ function addMessage(message, prepend = false){
     const div = document.createElement("div");
     div.className = "message";
 
+    if(message.user.username === current_user.sub){
+        div.classList.add("me");
+    }
+
     div.innerHTML = `
         <div>
             <b>${message.user.username}</b>
