@@ -13,11 +13,11 @@ async function loadMessages(){
     const container = document.getElementById("messages");
 
     messages.forEach(message => {
-        add_message(message);
+        addMessage(message);
     });
 }
 
-function add_message(message){
+function addMessage(message){
     const container = document.getElementById("messages");
 
     const div = document.createElement("div");
@@ -57,7 +57,7 @@ socket.onmessage = (e)=>{
     const data = JSON.parse(e.data);
 
     if(data.type === "message"){
-        add_message(data);
+        addMessage(data);
     }
 }
 
