@@ -1,3 +1,7 @@
+send_message_btn = document.getElementById("send-btn");
+message_input = document.getElementById("message-input");
+
+
 function formatDate(dateString) {
     return new Date(dateString).toLocaleString();
 }
@@ -28,6 +32,18 @@ function add_message(message){
     `;
 
     container.appendChild(div);
+}
+
+function send_message(){
+    const message = message_input.ariaValueMax.trim();
+
+    if(!message) return;
+
+    socket.send(JSON.stringify({
+        content: message
+    }));
+
+    message_input.value = "";
 }
 
 load_messages();
