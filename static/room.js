@@ -63,3 +63,10 @@ socket.onmessage = (e)=>{
 
 
 load_messages();
+send_message_btn.addEventListener("click", send_message);
+message_input.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter"){
+        e.preventDefault();
+        send_message();
+    }
+});
