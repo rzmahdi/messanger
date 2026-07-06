@@ -1,5 +1,6 @@
 send_message_btn = document.getElementById("send-btn");
 message_input = document.getElementById("message-input");
+const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 let oldest_message_id = null;
 
 
@@ -76,6 +77,8 @@ const container = document.getElementById("messages");
 let is_loading_older = false;
 
 container.addEventListener("scroll", async () => {
+    go_to_bottom_btn.classList.toggle("show", !isNearBottom());
+
     if (container.scrollTop === 0 && !is_loading_older && oldest_message_id !== null) {
         is_loading_older = true;
 
@@ -105,6 +108,8 @@ container.addEventListener("scroll", async () => {
     }
 });
 
+
+go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
 const token = localStorage.getItem("access_token");
