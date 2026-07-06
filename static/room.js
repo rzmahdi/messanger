@@ -2,7 +2,21 @@ send_message_btn = document.getElementById("send-btn");
 message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 let oldest_message_id = null;
+const token = localStorage.getItem("access_token");
 
+
+
+function parseJwt(token){
+    try {
+        const base64Payload = token.split(".")[1];
+        const payload = JSON.parse(atob(base64Payload.replace(/-/g, "+").replace(/_/g, "/")));
+        return payload;
+    } catch(err){
+        console.error("Invalid token:", err);
+        return null;
+    }
+}
+const current_user = parseJwt(token);
 
 function formatDate(dateString) {
     return new Date(dateString).toLocaleString();
@@ -112,7 +126,6 @@ container.addEventListener("scroll", async () => {
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
-const token = localStorage.getItem("access_token");
 const socket = new WebSocket(
     `ws://${window.location.host}/ws/${room_id}/messages?token=${token}`
 );
