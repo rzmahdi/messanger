@@ -19,7 +19,11 @@ function parseJwt(token){
 const current_user = parseJwt(token);
 
 function formatDate(dateString) {
-    return new Date(dateString).toLocaleString();
+    return new Date(dateString).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+    });
 }
 
 async function loadMessages(){
