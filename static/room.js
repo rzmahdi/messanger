@@ -35,7 +35,7 @@ function add_message(message){
 }
 
 function send_message(){
-    const message = message_input.ariaValueMax.trim();
+    const message = message_input.value.trim();
 
     if(!message) return;
 
