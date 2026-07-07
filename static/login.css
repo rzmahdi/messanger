@@ -151,3 +151,13 @@ div.login-modal-notif-box span{
 #register-link:hover{
     color: orangered
 }
+
+@media (max-width: 768px){
+    #login-form{
+        width: 90%;
+    }
+    
+    div.login-modal-notif-box{
+        width: 80%  ;
+    }
+}
