@@ -75,6 +75,7 @@ function sendMessage(){
     }));
 
     message_input.value = "";
+    autoResizeTextarea();
 }
 
 
@@ -130,6 +131,13 @@ container.addEventListener("scroll", async () => {
 });
 
 
+function autoResizeTextarea(){
+    message_input.style.height = "auto";
+    message_input.style.height = Math.min(message_input.scrollHeight, 
+        parseFloat(getComputedStyle(message_input).maxHeight)) + "px";
+}
+
+
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
@@ -154,9 +162,11 @@ socket.onmessage = (e)=>{
 
 loadMessages();
 send_message_btn.addEventListener("click", sendMessage);
+
 message_input.addEventListener("keydown", (e)=>{
-    if(e.key === "Enter"){
+    if(e.key === "Enter" && !e.shiftKey){
         e.preventDefault();
         sendMessage();
     }
 });
+message_input.addEventListener("input", autoResizeTextarea);
