@@ -139,6 +139,13 @@ container.addEventListener("scroll", async () => {
 });
 
 
+function autoResizeTextarea(){
+    message_input.style.height = "auto";
+    message_input.style.height = Math.min(message_input.scrollHeight, 
+        parseFloat(getComputedStyle(message_input).maxHeight)) + "px";
+}
+
+
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
