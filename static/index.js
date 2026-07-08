@@ -1,5 +1,7 @@
 const display_username = document.getElementById("display-username");
 const rooms_container = document.getElementById("rooms-container");
+const logout_btn = document.getElementById("logout");
+
 
 function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString();
@@ -58,6 +60,12 @@ async function display_rooms(){
     rooms_container.appendChild(div);
 });
 }
+
+function logOut(){
+    localStorage.removeItem("access_token");
+    window.location.href = "/login";
+}
+logout_btn.addEventListener("click", logOut);
 
 check_login();
 display_rooms();
