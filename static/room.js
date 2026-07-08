@@ -2,7 +2,34 @@ send_message_btn = document.getElementById("send-btn");
 message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 let oldest_message_id = null;
-const token = localStorage.getItem("access_token");
+
+
+async function checkLogin(){
+    const token = localStorage.getItem("access_token");
+    
+    if(!token){
+        window.location.href = "/login";
+        return
+    }
+
+    const response = await fetch("/me", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    if(response.status === 401){
+        localStorage.removeItem("access_token");
+        window.location.href = "/login";
+        return
+    }
+
+    if(response.ok){
+        const user = await response.json();
+        display_username.textContent = user.username;
+    }
+}
+checkLogin()
 
 
 function parseJwt(token){
