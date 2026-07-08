@@ -1,6 +1,8 @@
 const display_username = document.getElementById("display-username");
 const rooms_container = document.getElementById("rooms-container");
 const logout_btn = document.getElementById("logout");
+const create_room_btn = document.getElementById("ceate-room-btn");
+const search_room_input = document.getElementById("search-room-input");
 
 
 function formatDate(dateString) {
@@ -34,8 +36,18 @@ async function check_login(){
 }
 
 
-async function display_rooms(){
-    rooms_response = await fetch("/rooms");
+function clearRooms(){
+    rooms_container.innerHTML = "";
+}
+
+async function display_rooms(room_name = null){
+    console.log(room_name);
+    if(room_name){
+        rooms_response = await fetch(`/rooms?room_name=${room_name}`);
+    }else{
+        rooms_response = await fetch("/rooms");
+    }
+
     rooms = await rooms_response.json();
 
     rooms.forEach(room => {
@@ -66,6 +78,13 @@ function logOut(){
     window.location.href = "/login";
 }
 logout_btn.addEventListener("click", logOut);
+
+
+search_room_input.addEventListener("input", async (e)=>{
+    room_name = search_room_input.value;
+    clearRooms();
+    display_rooms(room_name);
+});
 
 check_login();
 display_rooms();
