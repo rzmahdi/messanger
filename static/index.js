@@ -85,5 +85,37 @@ search_room_input.addEventListener("input", async (e)=>{
     display_rooms(room_name);
 });
 
+
+create_room_btn.addEventListener("click", async (e)=>{
+    if(!check_login()){
+        window.location.href("/login");
+    }
+
+    room_name = search_room_input.value;
+    if(!room_name) return;
+
+    rooms_response = await fetch(`/rooms?room_name=${room_name}`);
+    rooms = await rooms_response.json();
+
+    const token = localStorage.getItem("access_token");
+
+    if(rooms.length === 0){
+        const create_room_response = await fetch("/rooms",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                name: room_name
+            })
+        })
+        if(create_room_response.ok){
+            clearRooms();
+            display_rooms(room_name);
+        }
+    }
+})
+
 check_login();
 display_rooms();
