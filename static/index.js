@@ -9,8 +9,8 @@ const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
 
 
-function redirect_to_home(){
-    window.location.href = "/";
+function redirect_to_login(){
+    window.location.href = "/login";
 }
 
 function show_notif(text){
@@ -31,7 +31,7 @@ async function check_login(){
     const token = localStorage.getItem("access_token");
     
     if(!token){
-        window.location.href = "/login";
+        redirect_to_login();
         return
     }
 
@@ -43,7 +43,7 @@ async function check_login(){
 
     if(response.status === 401){
         localStorage.removeItem("access_token");
-        window.location.href = "/login";
+        redirect_to_login();
         return
     }
 
