@@ -2,11 +2,9 @@ send_message_btn = document.getElementById("send-btn");
 message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 let oldest_message_id = null;
+const token = localStorage.getItem("access_token");
 
-
-async function checkLogin(){
-    const token = localStorage.getItem("access_token");
-    
+async function checkLogin(){    
     if(!token){
         window.location.href = "/login";
         return
