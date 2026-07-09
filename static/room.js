@@ -21,11 +21,6 @@ async function checkLogin(){
         window.location.href = "/login";
         return
     }
-
-    if(response.ok){
-        const user = await response.json();
-        display_username.textContent = user.username;
-    }
 }
 checkLogin()
 
