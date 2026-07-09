@@ -101,8 +101,8 @@ header{
     cursor: pointer;
 }
 
-#create-room:hover{
-    background-color: rgb(255, 255, 255, .3);
+#create-room-btn:hover{
+    background-color: rgb(255, 255, 255, .22);
 }
 
 
