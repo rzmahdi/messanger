@@ -4,6 +4,24 @@ const logout_btn = document.getElementById("logout");
 const create_room_btn = document.getElementById("create-room-btn");
 const search_room_input = document.getElementById("search-room-input");
 
+const notif_modal = document.getElementById("modal-overlay-notif");
+const notif_text = document.getElementById("notif-modal-text");
+const close_notif_btn = document.getElementById("modal-notif-close-btn");
+
+
+function redirect_to_home(){
+    window.location.href = "/";
+}
+
+function show_notif(text){
+    notif_modal.classList.add("show");
+    notif_text.innerHTML = text;
+}
+
+function close_notif(){
+    notif_modal.classList.remove("show");
+}
+
 
 function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString();
@@ -110,12 +128,26 @@ create_room_btn.addEventListener("click", async (e)=>{
                 name: room_name
             })
         })
+
         if(create_room_response.ok){
+            show_notif("Room Created✅");
             clearRooms();
             display_rooms(room_name);
         }
     }
 })
+
+
+close_notif_btn.addEventListener("click", (e)=>{
+    close_notif();
+});
+
+notif_modal.addEventListener("click", (e)=>{
+    if(e.target === notif_modal){
+        close_notif();
+    }
+})
+
 
 check_login();
 display_rooms();
