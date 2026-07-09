@@ -27,7 +27,7 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString();
 }
 
-async function check_login(){
+async function checkLogin(){
     const token = localStorage.getItem("access_token");
     
     if(!token){
@@ -105,7 +105,7 @@ search_room_input.addEventListener("input", async (e)=>{
 
 
 create_room_btn.addEventListener("click", async (e)=>{
-    if(!check_login()){
+    if(!checkLogin()){
         window.location.href("/login");
     }
 
@@ -149,5 +149,5 @@ notif_modal.addEventListener("click", (e)=>{
 })
 
 
-check_login();
+checkLogin();
 display_rooms();
