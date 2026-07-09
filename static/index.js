@@ -1,7 +1,7 @@
 const display_username = document.getElementById("display-username");
 const rooms_container = document.getElementById("rooms-container");
 const logout_btn = document.getElementById("logout");
-const create_room_btn = document.getElementById("ceate-room-btn");
+const create_room_btn = document.getElementById("create-room-btn");
 const search_room_input = document.getElementById("search-room-input");
 
 
