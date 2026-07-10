@@ -229,6 +229,8 @@ message_context_edit_btn.addEventListener("click", ()=>{
     hideSendBtn();
     showEditdBtn();
 
+    message_input.focus();
+
     message_input.value = document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent;
     autoResizeTextarea();
 })
