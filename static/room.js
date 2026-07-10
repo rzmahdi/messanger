@@ -222,6 +222,29 @@ message_context_edit_btn.addEventListener("click", ()=>{
     autoResizeTextarea();
 })
 
+
+edit_message_btn.addEventListener("click", async ()=>{
+    checkLogin();
+
+    const edit_message_response = await fetch(`/room/${room_id}/messages/${selected_message_id}`, {
+        method: "PATCH",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "content-type": "Application/json" 
+        },
+        body: JSON.stringify({
+            content: message_input.value
+        })
+    })
+
+    if(edit_message_response.ok){
+        document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent = message_input.value;
+        message_input.value = "";
+        hideEditBtn();
+        showSendBtn();
+    }
+})
+
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
@@ -231,7 +254,7 @@ const socket = new WebSocket(
 
 socket.onmessage = (e)=>{
     const data = JSON.parse(e.data);
-
+    
     const should_scroll = isNearBottom();
 
     if(data.type === "message"){
