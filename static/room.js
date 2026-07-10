@@ -198,6 +198,7 @@ function editMessage(){
     message_input.value = "";
     hideEditBtn();
     showSendBtn();
+    is_editing = false;
 }
 
 
@@ -249,7 +250,6 @@ edit_message_btn.addEventListener("click", async ()=>{
 
     if(edit_message_response.ok){
         editMessage();
-        is_editing = false;
     }
 })
 
@@ -283,7 +283,6 @@ message_input.addEventListener("keydown", (e)=>{
         e.preventDefault();
         if(is_editing){
             editMessage();
-            is_editing = false;
         }else{
             sendMessage();
         }
