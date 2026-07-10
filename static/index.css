@@ -211,4 +211,6 @@ div.modal-notif-box button{
 
 div.modal-notif-box span{
     width: 85%;
+    font-size: large;
+    font-weight: bold;
 }
