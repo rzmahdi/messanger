@@ -195,6 +195,10 @@ function showSendBtn(){
     send_message_btn.classList.add("show");
 }
 
+function hideSendBtn(){
+    send_message_btn.classList.remove("show");
+}
+
 
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
