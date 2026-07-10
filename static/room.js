@@ -3,8 +3,12 @@ const edit_message_btn = document.getElementById("edit-btn");
 const message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 const message_context_box = document.getElementById("message-context-box");
-let oldest_message_id = null;
+const message_context_edit_btn = document.getElementById("edit-message-btn");
 const token = localStorage.getItem("access_token");
+
+let oldest_message_id = null;
+let selected_message_id = null;
+
 
 async function checkLogin(){    
     if(!token){
@@ -208,6 +212,15 @@ function hideEditBtn(){
     edit_message_btn.classList.remove("show");
 }
 
+
+message_context_edit_btn.addEventListener("click", ()=>{
+    hideContextBox();
+    hideSendBtn();
+    showEditdBtn();
+
+    message_input.value = document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent;
+    autoResizeTextarea();
+})
 
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
