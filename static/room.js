@@ -192,6 +192,14 @@ function showContextBox(x, y){
     message_context_box.style.top = `${y}px`;
 }
 
+function editMessage(){
+    document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent = message_input.value;
+    message_input.value = "";
+    hideEditBtn();
+    showSendBtn();
+}
+
+
 function hideContextBox(){
     message_context_box.classList.remove("show");
 }
@@ -238,10 +246,7 @@ edit_message_btn.addEventListener("click", async ()=>{
     })
 
     if(edit_message_response.ok){
-        document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent = message_input.value;
-        message_input.value = "";
-        hideEditBtn();
-        showSendBtn();
+        editMessage();
     }
 })
 
