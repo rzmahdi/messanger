@@ -191,6 +191,11 @@ function hideContextBox(){
     message_context_box.classList.remove("show");
 }
 
+function showSendBtn(){
+    send_message_btn.classList.add("show");
+}
+
+
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
