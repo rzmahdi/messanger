@@ -40,3 +40,6 @@ class MessageResponseSchema(BaseModel):
 
 class MessageCreateSchema(BaseModel):
     content: str
+
+class MessageEditSchema(BaseModel):
+    content: str
