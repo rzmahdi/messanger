@@ -1,5 +1,5 @@
-send_message_btn = document.getElementById("send-btn");
-message_input = document.getElementById("message-input");
+const send_message_btn = document.getElementById("send-btn");
+const message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 const message_context_box = document.getElementById("message-context-box");
 let oldest_message_id = null;
