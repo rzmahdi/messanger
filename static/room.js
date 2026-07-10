@@ -223,3 +223,10 @@ message_input.addEventListener("keydown", (e)=>{
     }
 });
 message_input.addEventListener("input", autoResizeTextarea);
+
+
+document.addEventListener("click", (e) => {
+    if (!message_context_box.contains(e.target)) {
+        hideContextBox();
+    }
+});
