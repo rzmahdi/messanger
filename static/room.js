@@ -1,6 +1,7 @@
 send_message_btn = document.getElementById("send-btn");
 message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
+const message_context_box = document.getElementById("message-context-box");
 let oldest_message_id = null;
 const token = localStorage.getItem("access_token");
 
@@ -166,6 +167,10 @@ function autoResizeTextarea(){
         parseFloat(getComputedStyle(message_input).maxHeight)) + "px";
 }
 
+
+function showContextBox(){
+    message_context_box.className = "show";
+}
 
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
