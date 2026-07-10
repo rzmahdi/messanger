@@ -86,6 +86,19 @@ function addMessage(message, prepend = false){
         <span>${formatDate(message.created_at)}</span>
     `;
 
+
+    div.addEventListener("contextmenu", (e)=>{
+        e.preventDefault();
+
+        const message = e.target.closest(".message");
+        if(!message) return;
+
+        selected_message_id = message.dataset.message_id;
+        hideContextBox();
+        showContextBox(e.clientX, e.clientY);
+    });
+
+
     if(prepend){
         container.prepend(div);
     }else {
