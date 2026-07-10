@@ -111,7 +111,10 @@ create_room_btn.addEventListener("click", async (e)=>{
     }
 
     room_name = search_room_input.value;
-    if(!room_name) return;
+    if(!room_name){
+        show_notif("chanell name can not be empty❌");
+        return
+    }
 
     rooms_response = await fetch(`/rooms?room_name=${room_name}`);
     rooms = await rooms_response.json();
