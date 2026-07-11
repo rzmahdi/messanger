@@ -203,12 +203,26 @@ function editMessage(){
     }));
 }
 
+function deleteMessage(){
+    socket.send(JSON.stringify({
+        type: "delete",
+        message_id: selected_message_id
+    }));
+}
+
 function updateMessageInDOM(content, message_id){
     document.querySelector(`[data-message_id='${message_id}'] p`).textContent = content;
     message_input.value = "";
     hideEditBtn();
     showSendBtn();
     is_editing = false;
+}
+
+function deleteMessageInDOM(message_id){
+    document.querySelector(`[data-message_id='${message_id}']`).classList.add("remove");
+    setTimeout(() => {
+        document.querySelector(`[data-message_id='${message_id}']`).remove();
+    }, 210);
 }
 
 
@@ -249,20 +263,7 @@ message_context_delete_btn.addEventListener("click", async()=>{
     hideContextBox();
     checkLogin();
 
-    const delete_message_response = await fetch(`/room/${room_id}/messages/${selected_message_id}`, {
-        method: "DELETE",
-        headers:{
-            Authorization: `Bearer ${token}`
-        }
-    })
-
-    if(delete_message_response.ok){
-        document.querySelector(`[data-message_id='${selected_message_id}']`).classList.add("remove");
-
-        setTimeout(() => {
-        document.querySelector(`[data-message_id='${selected_message_id}']`).remove();
-        }, 210);   
-    }
+    deleteMessage();
 })
 
 
@@ -289,6 +290,10 @@ socket.onmessage = (e)=>{
 
     if(data.type == "edit"){
         updateMessageInDOM(data.content, data.id);
+    }
+
+    if(data.type == "delete"){
+        deleteMessageInDOM(data.message_id);
     }
 }
 
