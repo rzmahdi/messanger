@@ -49,7 +49,7 @@ async def handle_delete_message(data: dict, room_id: int, current_user, db):
     db.delete(message)
     db.commit()
 
-    manager.broadcast(
+    await manager.broadcast(
         room_id,
         {
             "type": "delete",
@@ -78,7 +78,7 @@ async def handle_edit_message(data: dict, room_id: int, current_user, db):
     db.commit()
     db.refresh(message)
 
-    manager.broadcast(
+    await manager.broadcast(
         room_id,
         {
             "type": "edit",
@@ -124,11 +124,11 @@ async def room_chat(websocket: WebSocket, room_id: int):
             event_type = data.get("type", "message")
 
             if event_type == "message":
-                handle_new_message(data, room_id, current_user, db)
+                await handle_new_message(data, room_id, current_user, db)
             elif event_type == "edit":
-                handle_edit_message(data, room_id, current_user, db)
+                await handle_edit_message(data, room_id, current_user, db)
             elif event_type == "delete":
-                handle_delete_message(data, room_id, current_user, db)
+                await handle_delete_message(data, room_id, current_user, db)
 
     except WebSocketDisconnect:
         pass
