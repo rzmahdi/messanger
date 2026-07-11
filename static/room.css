@@ -111,6 +111,12 @@ body{
     line-height: 1;
 }
 
+#messages .message.remove{
+    opacity: 0;
+    transform: translate(5px);
+    transition: .2s ease;
+}
+
 #input-box{
     flex-shrink: 0;
     min-height: 60px;
