@@ -74,3 +74,25 @@ def edit_message(
     db.refresh(message)
 
     return message
+
+
+@router.delete("/room/{room_id}/messages/{message_id}")
+def delete_message(
+    room_id: int,
+    message_id: int,
+    current_user: User=Depends(get_current_user),
+    db: Session=Depends(get_db)
+    ):
+
+    if not room_exist(room_id, db):
+        raise HTTPException(404, "Room not found!")
+
+    message = db.query(Message).filter_by(id=message_id).first()
+    if not message:
+        raise HTTPException(404, "Message not found!")
+    
+    if message.user_id != current_user.id:
+        raise HTTPException(403, "You can not edit this message!")
+    
+    db.delete(message)
+    db.commit()
