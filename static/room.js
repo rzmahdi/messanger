@@ -83,15 +83,21 @@ function addMessage(message, prepend = false){
 
     if(message.user.username === current_user.sub){
         div.classList.add("me");
-    }
-
-    div.innerHTML = `
+        div.innerHTML = `
         <div>
-            <b>${message.user.username}</b>
             <p>${message.content}</p>
         </div>
         <span>${formatDate(message.created_at)}</span>
-    `;
+        `;
+    }else{
+        div.innerHTML = `
+        <div>
+        <b>${message.user.username}</b>
+        <p>${message.content}</p>
+        </div>
+        <span>${formatDate(message.created_at)}</span>
+        `;
+    }
 
 
     div.addEventListener("contextmenu", (e)=>{
