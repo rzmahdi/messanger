@@ -34,6 +34,31 @@ async def handle_new_message(data: dict, room_id: int, current_user, db):
     )
 
 
+async def handle_delete_message(data: dict, room_id: int, current_user, db):
+    message_id = data.get("message_id")
+    if not message_id:
+        return
+    
+    message = db.quary(Message).filter_by(id=message_id, room_id=room_id).first()
+    if not message:
+        return
+    
+    if not message.user_id == current_user.id:
+        return
+    
+    db.delete(message)
+    db.commit()
+
+    manager.broadcast(
+        room_id,
+        {
+            "type": "delete",
+            "message_id": message_id,
+            "room_id": room_id
+        }
+    )
+
+
 async def handle_edit_message(data: dict, room_id: int, db):
     new_content = data.get("content")
     message_id = data.get("message_id")
