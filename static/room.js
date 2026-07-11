@@ -248,7 +248,11 @@ message_context_delete_btn.addEventListener("click", async()=>{
     })
 
     if(delete_message_response.ok){
+        document.querySelector(`[data-message_id='${selected_message_id}']`).classList.add("remove");
+
+        setTimeout(() => {
         document.querySelector(`[data-message_id='${selected_message_id}']`).remove();
+        }, 210);   
     }
 })
 
