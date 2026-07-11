@@ -95,14 +95,15 @@ function addMessage(message, prepend = false){
 
 
     div.addEventListener("contextmenu", (e)=>{
+        if(div.classList.contains("me")){
+            const message = e.target.closest(".message");
+            if(!message) return;
+
+            selected_message_id = message.dataset.message_id;
+            hideContextBox();
+            showContextBox(e.clientX, e.clientY);
+        }
         e.preventDefault();
-
-        const message = e.target.closest(".message");
-        if(!message) return;
-
-        selected_message_id = message.dataset.message_id;
-        hideContextBox();
-        showContextBox(e.clientX, e.clientY);
     });
 
 
