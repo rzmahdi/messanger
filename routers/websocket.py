@@ -121,27 +121,15 @@ async def room_chat(websocket: WebSocket, room_id: int):
     try:
         while True:
             data = await websocket.receive_json()
-            content = data.get("content")
-            if not content:
-                continue
+            event_type = data.get("type", "message")
 
-            new_message = Message(
-                user_id=current_user.id, room_id=room_id, content=content
-            )
-            db.add(new_message)
-            db.commit()
-            db.refresh(new_message)
-            await manager.broadcast(
-                room_id,
-                {
-                    "type": "message",
-                    "id": new_message.id,
-                    "content": new_message.content,
-                    "room_id": room_id,
-                    "created_at": str(new_message.created_at),
-                    "user": {"id": current_user.id, "username": current_user.username},
-                },
-            )
+            if event_type == "message":
+                handle_new_message(data, room_id, current_user, db)
+            elif event_type == "edit":
+                handle_edit_message(data, room_id, current_user, db)
+            elif event_type == "delete":
+                handle_delete_message(data, room_id, current_user, db)
+
     except WebSocketDisconnect:
         pass
     finally:
