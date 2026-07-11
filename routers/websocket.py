@@ -59,7 +59,7 @@ async def handle_delete_message(data: dict, room_id: int, current_user, db):
     )
 
 
-async def handle_edit_message(data: dict, room_id: int, db):
+async def handle_edit_message(data: dict, room_id: int, current_user, db):
     new_content = data.get("content")
     message_id = data.get("message_id")
 
@@ -67,6 +67,10 @@ async def handle_edit_message(data: dict, room_id: int, db):
         return
     
     message = db.query(Message).filter_by(id=message_id, room_id=room_id).first()
+
+    if not message.user_id == current_user.id:
+        return
+
     if not message:
         return
     
