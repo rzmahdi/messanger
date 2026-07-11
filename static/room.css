@@ -295,6 +295,10 @@ body{
     background-color: rgba(0, 255, 255, 0.3);
 }
 
+#delete-message-btn:hover{
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
 @media (max-width: 768px){
     #chat-container{
         width: 95%;
