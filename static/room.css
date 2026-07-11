@@ -111,9 +111,15 @@ body{
     line-height: 1;
 }
 
-#messages .message.remove{
+#messages .message.me.remove{
     opacity: 0;
     transform: translate(5px);
+    transition: .2s ease;
+}
+
+#messages .message.remove:not(.me){
+    opacity: 0;
+    transform: translate(-5px);
     transition: .2s ease;
 }
 
