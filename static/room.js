@@ -4,6 +4,7 @@ const message_input = document.getElementById("message-input");
 const go_to_bottom_btn = document.getElementById("go-to-bottom-container");
 const message_context_box = document.getElementById("message-context-box");
 const message_context_edit_btn = document.getElementById("edit-message-btn");
+const message_context_delete_btn = document.getElementById("delete-message-btn");
 const token = localStorage.getItem("access_token");
 
 let oldest_message_id = null;
@@ -233,6 +234,22 @@ message_context_edit_btn.addEventListener("click", ()=>{
 
     message_input.value = document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent;
     autoResizeTextarea();
+})
+
+message_context_delete_btn.addEventListener("click", async()=>{
+    hideContextBox();
+    checkLogin();
+
+    const delete_message_response = await fetch(`/room/${room_id}/messages/${selected_message_id}`, {
+        method: "DELETE",
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    if(delete_message_response.ok){
+        document.querySelector(`[data-message_id='${selected_message_id}']`).remove();
+    }
 })
 
 
