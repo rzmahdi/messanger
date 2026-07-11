@@ -39,7 +39,7 @@ async def handle_delete_message(data: dict, room_id: int, current_user, db):
     if not message_id:
         return
     
-    message = db.quary(Message).filter_by(id=message_id, room_id=room_id).first()
+    message = db.query(Message).filter_by(id=message_id, room_id=room_id).first()
     if not message:
         return
     
