@@ -88,10 +88,6 @@ body{
     background-color: rgba(0, 150, 255, 0.28);
 }
 
-#messages .message.me div b{
-    color: rgb(0, 155, 116);
-}
-
 #messages .message div b{
     color: rgb(255, 174, 0);
 }
