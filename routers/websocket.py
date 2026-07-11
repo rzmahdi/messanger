@@ -8,6 +8,32 @@ manager = ConnectionManager()
 router = APIRouter()
 
 
+async def handle_new_message(data: dict, room_id: int, current_user, db):
+    content = data.get("content")
+    if not content:
+        return
+
+    new_message = Message(
+        user_id=current_user.id, room_id=room_id, content=content
+    )
+
+    db.add(new_message)
+    db.commit()
+    db.refresh(new_message)
+
+    await manager.broadcast(
+        room_id,
+        {
+            "type": "message",
+            "id": new_message.id,
+            "content": new_message.content,
+            "room_id": room_id,
+            "created_at": str(new_message.created_at),
+            "user": {"id": current_user.id, "username": current_user.username},
+        },
+    )
+
+
 @router.websocket("/ws/{room_id}/messages")
 async def room_chat(websocket: WebSocket, room_id: int):
     db = SessionLocal()
