@@ -196,7 +196,15 @@ function showContextBox(x, y){
 }
 
 function editMessage(){
-    document.querySelector(`[data-message_id='${selected_message_id}']`).getElementsByTagName("p")[0].textContent = message_input.value;
+    socket.send(JSON.stringify({
+        type: "edit",
+        message_id: selected_message_id,
+        content: message_input.value
+    }));
+}
+
+function updateMessageInDOM(content, message_id){
+    document.querySelector(`[data-message_id='${message_id}'] p`).textContent = content;
     message_input.value = "";
     hideEditBtn();
     showSendBtn();
@@ -260,21 +268,7 @@ message_context_delete_btn.addEventListener("click", async()=>{
 
 edit_message_btn.addEventListener("click", async ()=>{
     checkLogin();
-
-    const edit_message_response = await fetch(`/room/${room_id}/messages/${selected_message_id}`, {
-        method: "PATCH",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "content-type": "Application/json" 
-        },
-        body: JSON.stringify({
-            content: message_input.value
-        })
-    })
-
-    if(edit_message_response.ok){
-        editMessage();
-    }
+    editMessage();
 })
 
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
@@ -286,15 +280,15 @@ const socket = new WebSocket(
 
 socket.onmessage = (e)=>{
     const data = JSON.parse(e.data);
-    
-    const should_scroll = isNearBottom();
 
     if(data.type === "message"){
+        const should_scroll = isNearBottom();
         addMessage(data);
+        if(should_scroll) scrollToBottom();
     }
 
-    if(should_scroll){
-        scrollToBottom();
+    if(data.type == "edit"){
+        updateMessageInDOM(data.content, data.id);
     }
 }
 
