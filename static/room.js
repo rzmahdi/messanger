@@ -228,6 +228,14 @@ function updateMessageInDOM(content, message_id){
     hideEditBtn();
     showSendBtn();
     is_editing = false;
+
+    div = document.querySelector(`[data-message_id='${message_id}']`);
+
+    if(div.lastChild.textContent !== "edited"){
+        const span = document.createElement("span");
+        span.textContent = "edited";
+        div.appendChild(span);
+    }
 }
 
 function deleteMessageInDOM(message_id){
