@@ -1,5 +1,5 @@
 from database.database import Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -35,6 +35,7 @@ class Message(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
     created_at = Column(DateTime, default=datetime.now, nullable=False)
+    is_edited = Column(Boolean, default=False, nullable=False)
 
     user = relationship("User", back_populates="messages")
     room = relationship("Room", back_populates="messages")
