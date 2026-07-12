@@ -81,22 +81,19 @@ function addMessage(message, prepend = false){
     div.className = "message";
     div.dataset.message_id = message.id;
 
-    if(message.user.username === current_user.sub){
-        div.classList.add("me");
-        div.innerHTML = `
+    div.innerHTML = `
         <div>
             <p>${message.content}</p>
         </div>
         <span>${formatDate(message.created_at)}</span>
-        `;
+    `;
+
+    if(message.user.username === current_user.sub){
+        div.classList.add("me");
     }else{
-        div.innerHTML = `
-        <div>
-        <b>${message.user.username}</b>
-        <p>${message.content}</p>
-        </div>
-        <span>${formatDate(message.created_at)}</span>
-        `;
+        const b = document.createElement("b");
+        b.textContent = message.user.username;
+        div.firstElementChild.prepend(b);
     }
 
 
