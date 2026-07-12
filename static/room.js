@@ -211,6 +211,8 @@ function editMessage(){
         message_id: selected_message_id,
         content: message_input.value
     }));
+
+    autoResizeTextarea();
 }
 
 function deleteMessage(){
