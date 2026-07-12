@@ -97,6 +97,13 @@ function addMessage(message, prepend = false){
     }
 
 
+    if(message.is_edited){
+        const span = document.createElement("span");
+        span.textContent = "edited";
+        div.appendChild(span);
+    }
+
+
     div.addEventListener("contextmenu", (e)=>{
         if(div.classList.contains("me")){
             const message = e.target.closest(".message");
