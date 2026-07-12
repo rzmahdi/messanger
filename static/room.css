@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+
 *{
     margin: 0;
     padding: 0;
@@ -18,10 +21,12 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: .3rem;
     font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-#chat-container{
+#chat-container, #chat-title-container{
     width: 60%;
     height: 80vh;
     min-height: 0;
@@ -37,6 +42,33 @@ body{
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     position: relative;
 }
+
+#chat-title-container{
+    width: 59%;
+    height: 50px;
+    border-radius: 10rem;
+
+    color: rgb(228, 228, 228);
+    background: linear-gradient(to bottom, rgba(167, 167, 167, 0.15), rgba(0, 0, 0, .3));
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 2rem;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 16px;
+
+    position: fixed;
+    top: 120px;
+
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(16px);
+
+    z-index: 2;
+}
+
 
 #messages{
     flex: 1;
