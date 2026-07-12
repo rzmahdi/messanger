@@ -75,6 +75,7 @@ async def handle_edit_message(data: dict, room_id: int, current_user, db):
         return
     
     message.content = new_content
+    message.is_edited = True
     db.commit()
     db.refresh(message)
 
