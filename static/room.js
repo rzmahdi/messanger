@@ -188,9 +188,23 @@ container.addEventListener("scroll", async () => {
 
 
 function autoResizeTextarea(){
+    const style = getComputedStyle(message_input);
+    const line_height = parseFloat(style.lineHeight);
+    const padding = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    const border = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+
+    const max_lines = 4;
+    const min_height = line_height * 1 + padding + border;
+    const max_height = line_height * max_lines + padding + border;
+
     message_input.style.height = "auto";
-    message_input.style.height = Math.min(message_input.scrollHeight, 
-        parseFloat(getComputedStyle(message_input).maxHeight)) + "px";
+
+    const content_height = message_input.scrollHeight + border;
+
+    const new_height = Math.min(Math.max(content_height, min_height), max_height);
+    message_input.style.height = new_height + "px";
+
+    message_input.style.overflowY = content_height > max_height ? "auto" : "hidden";
 }
 
 
