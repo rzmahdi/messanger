@@ -359,3 +359,10 @@ document.addEventListener("click", (e) => {
         hideContextBox();
     }
 });
+
+
+window.addEventListener("pagehide", () => {
+    if(socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING){
+        socket.close();
+    }
+});
