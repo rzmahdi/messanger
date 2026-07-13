@@ -44,12 +44,16 @@ body{
 }
 
 #chat-title-container{
-    width: 59%;
+    width: 60%;
     height: 50px;
+    
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10rem;
 
+
     color: rgb(228, 228, 228);
-    background: linear-gradient(to bottom, rgba(167, 167, 167, 0.15), rgba(0, 0, 0, .3));
+    background: linear-gradient(to bottom, rgba(167, 167, 167, 0.15), rgba(255, 255, 255, 0.2));
 
     flex-direction: row;
     align-items: center;
@@ -60,13 +64,8 @@ body{
     font-weight: bold;
     font-size: 16px;
 
-    position: fixed;
-    top: 120px;
-
     -webkit-backdrop-filter: blur(24px);
     backdrop-filter: blur(16px);
-
-    z-index: 2;
 }
 
 
