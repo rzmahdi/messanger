@@ -353,4 +353,8 @@ body{
     #go-to-bottom-container{
         right: 25px;
     }
+
+    #chat-title-container{
+        width: 95%;
+    }
 }
