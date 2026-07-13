@@ -115,12 +115,14 @@ async def room_chat(websocket: WebSocket, room_id: int):
         return
 
     await manager.connect(room_id, current_user.id, current_user.username, websocket)
+    online_user_count = len(manager.active_connections.get(room_id))
+
     await manager.broadcast(
         room_id=room_id,
         message={
             "type": "join",
             "username": current_user.username,
-            "online_user_count": len(manager.active_connections[room_id]),
+            "online_user_count": online_user_count,
         }
     )
 
@@ -142,12 +144,14 @@ async def room_chat(websocket: WebSocket, room_id: int):
         await manager.disconnect(
             room_id=room_id, user_id=current_user.id, websocket=websocket
         )
+        online_user_count = len(manager.active_connections.get(room_id, {}))
+
         await manager.broadcast(
             room_id=room_id,
             message={
                 "type": "leave",
                 "username": current_user.username,
-                "online_user_count": len(manager.active_connections[room_id]),
+                "online_user_count": online_user_count,
             }
         )
         db.close()
