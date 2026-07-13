@@ -167,7 +167,7 @@ body{
 #message-input{
     flex: 1;
     resize: none;
-    overflow-y: auto;
+    overflow-y: hidden;
 
     padding: 10px 15px;
     border-radius: 20px;
@@ -176,10 +176,11 @@ body{
     color: rgb(230, 230, 230);
     font-size: 14px;
     font-family: inherit;
-    line-height: 1.4;
+    line-height: 20px;
     outline: none;
 
-    max-height: calc(1.4em * 4 + 20px);
+    height: 42px;
+    max-height: 102px;
 
     transition: border-color 0.15s ease, background-color 0.15s ease;
 }
