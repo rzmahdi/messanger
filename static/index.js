@@ -33,6 +33,9 @@ function showContextBox(x, y){
     room_context_box.style.top = `${y}px`;
 }
 
+function hideContextBox(x, y){
+    room_context_box.classList.remove("show");
+}
 
 function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString();
