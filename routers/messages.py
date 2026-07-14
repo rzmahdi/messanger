@@ -62,7 +62,7 @@ def edit_message(
     if not room_exist(room_id, db):
         raise HTTPException(404, "Room not found!")
 
-    message = db.query(Message).filter_by(id=message_id).first()
+    message = db.query(Message).filter_by(id=message_id, room_id=room_id).first()
     if not message:
         raise HTTPException(404, "Message not found!")
     
