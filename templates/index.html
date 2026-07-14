@@ -29,6 +29,16 @@
         <button id="delete-room-btn">Delete</button>
     </div>
 
+    <div id="modal-overlay">
+        <div class="edit-room-name-box">
+            <button id="modal-edit-room-name-close-btn">x</button>
+            <h3>Edit Room Name</h3>
+            <input type="text" name="room-name" id="edit-room-name" placeholder="New Room Name">
+            <span id="room-name-error">this filed can not be empty!</span>
+            <button type="button" id="modal-edit-room-name-btn">Edit</button>
+        </div>
+    </div>
+
     <div id="rooms-container"></div>
 
     <script src="/static/index.js"></script>
