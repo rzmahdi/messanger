@@ -29,6 +29,9 @@ class RoomResponseSchema(BaseModel):
 class RoomCreateSchema(BaseModel):
     name: str
 
+class RoomEditSchema(BaseModel):
+    name: str
+
 
 class MessageResponseSchema(BaseModel):
     id: int
