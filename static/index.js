@@ -171,6 +171,11 @@ notif_modal.addEventListener("click", (e)=>{
     }
 })
 
+document.addEventListener("click", (e) => {
+    if (!room_context_box.contains(e.target)) {
+        hideContextBox();
+    }
+});
 
 checkLogin();
 display_rooms();
