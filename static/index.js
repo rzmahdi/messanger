@@ -12,6 +12,8 @@ const notif_modal = document.getElementById("modal-overlay-notif");
 const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
 
+edit_modal_overlay = document.getElementById("modal-overlay");
+
 const token = localStorage.getItem("access_token");
 
 let selected_room_id = null;
@@ -40,6 +42,15 @@ function showContextBox(x, y){
 function hideContextBox(x, y){
     room_context_box.classList.remove("show");
 }
+
+function showEditModal(){
+    edit_modal_overlay.className = "show";
+}
+
+function hideEditModal(){
+    edit_modal_overlay.classList.remove("show");
+}
+
 
 function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString();
