@@ -39,7 +39,7 @@ function showContextBox(x, y){
     room_context_box.style.top = `${y}px`;
 }
 
-function hideContextBox(x, y){
+function hideContextBox(){
     room_context_box.classList.remove("show");
 }
 
