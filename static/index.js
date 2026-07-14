@@ -12,6 +12,8 @@ const notif_modal = document.getElementById("modal-overlay-notif");
 const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
 
+let selected_room_id = null;
+
 
 function redirect_to_login(){
     window.location.href = "/login";
@@ -103,6 +105,7 @@ async function display_rooms(room_name = null){
 
     div.addEventListener("contextmenu", (e)=>{
         e.preventDefault();
+        selected_room_id = div.dataset.room_id;
         showContextBox(e.clientX, e.clientY);
     });
 
