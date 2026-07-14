@@ -4,6 +4,10 @@ const logout_btn = document.getElementById("logout");
 const create_room_btn = document.getElementById("create-room-btn");
 const search_room_input = document.getElementById("search-room-input");
 
+const room_context_box = document.getElementById("room-context-box");
+const room_context_edit_btn = document.getElementById("edit-room-btn");
+const room_context_delete_btn = document.getElementById("delete-room-btn");
+
 const notif_modal = document.getElementById("modal-overlay-notif");
 const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
@@ -20,6 +24,13 @@ function show_notif(text){
 
 function close_notif(){
     notif_modal.classList.remove("show");
+}
+
+
+function showContextBox(x, y){
+    room_context_box.className = "show";
+    room_context_box.style.left = `${x}px`;
+    room_context_box.style.top = `${y}px`;
 }
 
 
