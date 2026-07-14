@@ -12,6 +12,8 @@ const notif_modal = document.getElementById("modal-overlay-notif");
 const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
 
+const token = localStorage.getItem("access_token");
+
 let selected_room_id = null;
 
 
