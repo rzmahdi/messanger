@@ -38,6 +38,9 @@ def edit_room(
     if not room_exist(room_id, db):
         raise HTTPException(404, "Room does not exists!")
     
+    if db.query(Room).filter_by(name=request.name).first():
+        raise HTTPException(409, "a Room with this name already exists!")
+    
     room = db.query(Room).filter_by(id=room_id, created_by=user.id).first()
     if not room:
         raise HTTPException(403, "you can not edit this room!")
