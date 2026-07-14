@@ -13,6 +13,7 @@ const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
 
 edit_modal_overlay = document.getElementById("modal-overlay");
+const close_modal_btn = document.getElementById("modal-edit-room-name-close-btn");
 
 const token = localStorage.getItem("access_token");
 
@@ -185,6 +186,20 @@ notif_modal.addEventListener("click", (e)=>{
     if(e.target === notif_modal){
         close_notif();
     }
+})
+
+room_context_edit_btn.addEventListener("click", ()=>{
+    showEditModal();
+})
+
+edit_modal_overlay.addEventListener("click", (e)=>{
+    if(e.target === edit_modal_overlay){
+        hideEditModal();
+    }
+})
+
+close_modal_btn.addEventListener("click", ()=>{
+    hideEditModal();
 })
 
 document.addEventListener("click", (e) => {
