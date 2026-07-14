@@ -223,11 +223,11 @@ body{
     transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
-#send-btn:hover, #edit-btn{
+#send-btn:hover, #edit-btn:hover{
     background-color: rgba(0, 150, 255, 0.8);
 }
 
-#send-btn:active, #edit-btn{
+#send-btn:active, #edit-btn:active{
     transform: scale(0.96);
 }
 
