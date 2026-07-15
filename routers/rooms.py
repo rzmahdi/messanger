@@ -6,6 +6,7 @@ from database.database import get_db
 from services.auth_service import get_current_user
 from services.room import room_exist
 from typing import List
+from routers.websocket import manager
 
 router = APIRouter()
 
@@ -52,7 +53,7 @@ def edit_room(
     return room
 
 @router.delete("/rooms/{room_id}")
-def delete_room(
+async def delete_room(
     request: Request,
     room_id: int,
     user: User=Depends(get_current_user),
@@ -68,3 +69,12 @@ def delete_room(
     
     db.delete(room)
     db.commit()
+
+    await manager.broadcast(
+        room_id,
+        {
+            "type": "room_deleted"
+        }
+    )
+
+    await manager.disconnect_all(room_id)
