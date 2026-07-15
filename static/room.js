@@ -453,29 +453,9 @@ rename_room_btn.addEventListener("click", async ()=>{
 
     if(new_room_name.length !== 0){
         renameRoom(new_room_name);
-
-
-        if(rename_room_response.ok){
-            document.getElementById("chat-title").textContent = new_room_name;
-            hideEditModal();
-
-        }else if(rename_room_response.status === 404){
-            hideErrorSpan();
-            showErrorSpan();
-            room_name_error_span.textContent = "Room does not Exists!";
-        }else if(rename_room_response.status === 409){
-            hideErrorSpan();
-            showErrorSpan();
-            room_name_error_span.textContent = "a Room with this name already exists!";
-        }else if(rename_room_response.status === 403){
-            hideErrorSpan();
-            showErrorSpan();
-            room_name_error_span.textContent = "You do not have the premission to rename this room!";
-        }
     }else{
         hideErrorSpan();
-        showErrorSpan();
-        room_name_error_span.textContent = "this filed can not be empty!";
+        showErrorSpan("this filed can not be empty!");
     }
 })
 
