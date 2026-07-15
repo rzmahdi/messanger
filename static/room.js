@@ -440,7 +440,7 @@ close_modal_btn.addEventListener("click", ()=>{
 
 
 room_context_edit_btn.addEventListener("click", ()=>{
-    rename_input.value = document.getElementById("chat-title").textContent;
+    rename_input.value = chat_title_element.textContent;
     hideRoomContextBox();
     hideErrorSpan();
     showEditModal();
