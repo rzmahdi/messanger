@@ -15,6 +15,12 @@ const room_context_box = document.getElementById("room-context-box");
 const room_context_edit_btn = document.getElementById("edit-room-btn");
 const room_context_delete_btn = document.getElementById("delete-room-btn");
 
+const edit_modal_overlay = document.getElementById("modal-overlay");
+const close_modal_btn = document.getElementById("modal-edit-room-name-close-btn");
+const rename_room_btn = document.getElementById("modal-edit-room-name-btn");
+const rename_input = document.getElementById("edit-room-name-input");
+const room_name_error_span = document.getElementById("room-name-error");
+
 let oldest_message_id = null;
 let selected_message_id = null;
 let is_editing = null;
@@ -241,10 +247,33 @@ function hideRoomContextBox(){
     room_context_box.classList.remove("show");
 }
 
+function showEditModal(){
+    edit_modal_overlay.className = "show";
+}
+
+function hideEditModal(){
+    edit_modal_overlay.classList.remove("show");
+}
+
+function showErrorSpan(){
+    room_name_error_span.classList.add("error");
+}
+
+function hideErrorSpan(){
+    room_name_error_span.classList.remove("error");
+}
+
 function deleteMessage(){
     socket.send(JSON.stringify({
         type: "delete",
         message_id: selected_message_id
+    }));
+}
+
+function renameRoom(room_name){
+    socket.send(JSON.stringify({
+        type: "room_edit_name",
+        name: room_name
     }));
 }
 
@@ -386,6 +415,58 @@ message_input.addEventListener("input", (e)=>{
     }
 });
 
+edit_modal_overlay.addEventListener("click", (e)=>{
+    if(e.target === edit_modal_overlay){
+        hideEditModal();
+    }
+});
+
+close_modal_btn.addEventListener("click", ()=>{
+    hideEditModal();
+});
+
+
+room_context_edit_btn.addEventListener("click", ()=>{
+    rename_input.value = document.getElementById("chat-title").textContent;
+    hideRoomContextBox();
+    hideErrorSpan();
+    showEditModal();
+})
+
+rename_room_btn.addEventListener("click", async ()=>{
+    checkLogin();
+
+    new_room_name = rename_input.value;
+
+    if(new_room_name.length !== 0){
+        renameRoom(new_room_name);
+
+
+        if(rename_room_response.ok){
+            document.querySelector(
+                `[data-room_id='${selected_room_id}'] div.room-info h3`
+            ).textContent = new_room_name;
+            hideEditModal();
+
+        }else if(rename_room_response.status === 404){
+            hideErrorSpan();
+            showErrorSpan();
+            room_name_error_span.textContent = "Room does not Exists!";
+        }else if(rename_room_response.status === 409){
+            hideErrorSpan();
+            showErrorSpan();
+            room_name_error_span.textContent = "a Room with this name already exists!";
+        }else if(rename_room_response.status === 403){
+            hideErrorSpan();
+            showErrorSpan();
+            room_name_error_span.textContent = "You do not have the premission to rename this room!";
+        }
+    }else{
+        hideErrorSpan();
+        showErrorSpan();
+        room_name_error_span.textContent = "this filed can not be empty!";
+    }
+})
 
 document.addEventListener("click", (e) => {
     if (!message_context_box.contains(e.target)) {
