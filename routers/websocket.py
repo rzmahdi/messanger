@@ -147,6 +147,15 @@ async def handle_remove_room(data: dict, room_id: int, current_user, db):
     
     room = db.query(Room).filter_by(id=room_id, created_by=current_user.id).first()
     if not room:
+        await manager.broadcast(
+            room_id,
+            {
+                "type": "error",
+                "status": "403",
+                "scope": "delete_room",
+                "content": "you do not have the permission"
+            }
+        )
         return
     
     db.delete(room)
