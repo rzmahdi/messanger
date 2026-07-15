@@ -175,23 +175,7 @@ header{
     background:rgba(255,255,255,.14);
 }
 
-#modal-overlay-notif, #modal-overlay{
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    backdrop-filter: blur(5px);
-}
-
-#modal-overlay{
-    background: rgba(0, 0, 0, 0.8);
-}
-
-#modal-overlay-notif.show, #modal-overlay.show{
+#modal-overlay-notif.show{
     display: block;
 }
 
@@ -267,10 +251,6 @@ div.modal-notif-box span{
 
 #modal-edit-room-name-close-btn:hover{
     background: rgba(255, 255, 255, 0.32);
-}
-
-#modal-overlay h3{
-    margin-bottom: 1rem;
 }
 
 #edit-room-name-input{
