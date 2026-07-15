@@ -301,6 +301,10 @@ function deleteMessageInDOM(message_id){
     }, 210);
 }
 
+function renameRoomInDOM(name){
+    chat_title_element.textContent = name;
+    hideEditModal();
+}
 
 function hideContextBox(){
     message_context_box.classList.remove("show");
@@ -389,6 +393,11 @@ socket.onmessage = (e)=>{
         alert("This room has been deleted by the owner.");
         window.location.href = "/";
     }
+
+    if(data.type === "room_edit_name"){
+        renameRoomInDOM(data.new_name);
+    }
+
 
     if(data.type === "error"){
         if(data.status === "409"){
