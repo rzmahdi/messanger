@@ -222,14 +222,6 @@ div.modal-notif-box span{
     font-weight: bold;
 }
 
-#edit-room-btn:hover{
-    background-color: rgba(0, 255, 255, 0.3);
-}
-
-#delete-room-btn:hover{
-    background-color: rgba(255, 0, 0, 0.6);
-}
-
 #modal-edit-room-name-close-btn{
     position: absolute;
     right: 7px;
