@@ -233,6 +233,36 @@ rename_room_btn.addEventListener("click", async ()=>{
 })
 
 
+room_context_delete_btn.addEventListener("click", async ()=>{
+    checkLogin();
+
+    const delete_room_response = await fetch(`/rooms/${selected_room_id}`,{
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        }
+    })
+
+    if(delete_room_response.ok){
+        document.querySelector(
+        `[data-room_id='${selected_room_id}']`).remove();
+
+        hideEditModal();
+        hideContextBox();
+
+    }else if(delete_room_response.status === 404){
+        hideErrorSpan();
+        showErrorSpan();
+        room_name_error_span.textContent = "Room does not Exists!";
+    }else if(delete_room_response.status === 403){
+        hideErrorSpan();
+        showErrorSpan();
+        room_name_error_span.textContent = "You do not have the premission to remove this room!";
+    }
+})
+
+
 close_notif_btn.addEventListener("click", (e)=>{
     close_notif();
 });
