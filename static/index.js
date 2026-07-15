@@ -129,26 +129,26 @@ create_room_btn.addEventListener("click", async (e)=>{
     rooms_response = await fetch(`/rooms?room_name=${room_name}`);
     rooms = await rooms_response.json();
 
-    const token = localStorage.getItem("access_token");
-
-    if(rooms.length === 0){
-        const create_room_response = await fetch("/rooms",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                name: room_name
-            })
+    const create_room_response = await fetch("/rooms",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            name: room_name
         })
+    })
 
-        if(create_room_response.ok){
-            show_notif("Room Created✅");
-            clearRooms();
-            display_rooms(room_name);
-        }
+    if(create_room_response.ok){
+        show_notif("Room Created✅");
+        room_name = search_room_input.value;
+        clearRooms();
+        display_rooms(room_name);
+    }else if(create_room_response.status === 409){
+        show_notif("Room already exists!❌");
     }
+
 })
 
 
