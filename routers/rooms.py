@@ -22,6 +22,9 @@ def retrive_rooms(request: Request, room_name: str | None = None, db: Session=De
 
 @router.post("/rooms", status_code=201)
 def create_room(request: RoomCreateSchema, user: User=Depends(get_current_user), db: Session=Depends(get_db)):
+    if db.query(Room).filter_by(name=request.name).first():
+        raise HTTPException(409, "a Room with this name already exists!")
+
     new_room = Room(name=request.name, created_by=user.id)
     db.add(new_room)
     db.commit()
