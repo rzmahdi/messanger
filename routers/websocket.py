@@ -109,7 +109,7 @@ async def handle_edit_room_name(data: dict, room_id: int, current_user, db):
             room_id,
             {
                 "type": "error",
-                "content": "room_name_already_exists"
+                "content": "room name already exists"
             }
         )
 
