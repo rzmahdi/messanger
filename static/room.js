@@ -332,6 +332,11 @@ socket.onmessage = (e)=>{
     if(data.type === "leave"){
         chat_online_users_element.textContent = `${data.online_user_count} online`;
     }
+
+    if(data.type === "room_deleted"){
+        alert("This room has been deleted by the owner.");
+        window.location.href = "/";
+    }
 }
 
 
