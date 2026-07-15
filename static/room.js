@@ -9,6 +9,12 @@ const chat_title_element = document.getElementById("chat-title");
 const chat_online_users_element = document.getElementById("chat-online-number");
 const token = localStorage.getItem("access_token");
 
+const chat_title_container = document.getElementById("chat-title-container");
+
+const room_context_box = document.getElementById("room-context-box");
+const room_context_edit_btn = document.getElementById("edit-room-btn");
+const room_context_delete_btn = document.getElementById("delete-room-btn");
+
 let oldest_message_id = null;
 let selected_message_id = null;
 let is_editing = null;
@@ -224,6 +230,17 @@ function editMessage(){
     autoResizeTextarea();
 }
 
+
+function showRoomContextBox(x, y){
+    room_context_box.className = "show";
+    room_context_box.style.left = `${x}px`;
+    room_context_box.style.top = `${y}px`;
+}
+
+function hideRoomContextBox(){
+    room_context_box.classList.remove("show");
+}
+
 function deleteMessage(){
     socket.send(JSON.stringify({
         type: "delete",
@@ -301,6 +318,11 @@ edit_message_btn.addEventListener("click", async ()=>{
     editMessage();
 })
 
+chat_title_container.addEventListener("contextmenu", (e)=>{
+    e.preventDefault();
+    showRoomContextBox(e.clientX, e.clientY);
+})
+
 go_to_bottom_btn.addEventListener("click", scrollToBottom)
 
 // WebSocket
@@ -368,6 +390,9 @@ message_input.addEventListener("input", (e)=>{
 document.addEventListener("click", (e) => {
     if (!message_context_box.contains(e.target)) {
         hideContextBox();
+    }
+    if (!room_context_box.contains(e.target)) {
+        hideRoomContextBox();
     }
 });
 
