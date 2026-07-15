@@ -101,9 +101,17 @@ async def handle_edit_room_name(data: dict, room_id: int, current_user, db):
         return
     
     room = db.query(Room).filter_by(id=room_id, created_by=current_user.id).first()
-
     if not room:
         return
+    
+    if db.query(Room).filter_by(name=new_room_name).first():
+        await manager.broadcast(
+            room_id,
+            {
+                "type": "error",
+                "content": "room_name_already_exists"
+            }
+        )
     
     room.name = new_room_name
     db.commit()
