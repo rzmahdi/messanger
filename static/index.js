@@ -4,19 +4,9 @@ const logout_btn = document.getElementById("logout");
 const create_room_btn = document.getElementById("create-room-btn");
 const search_room_input = document.getElementById("search-room-input");
 
-const room_context_box = document.getElementById("room-context-box");
-const room_context_edit_btn = document.getElementById("edit-room-btn");
-const room_context_delete_btn = document.getElementById("delete-room-btn");
-
 const notif_modal = document.getElementById("modal-overlay-notif");
 const notif_text = document.getElementById("notif-modal-text");
 const close_notif_btn = document.getElementById("modal-notif-close-btn");
-
-const edit_modal_overlay = document.getElementById("modal-overlay");
-const close_modal_btn = document.getElementById("modal-edit-room-name-close-btn");
-const rename_room_btn = document.getElementById("modal-edit-room-name-btn");
-const rename_input = document.getElementById("edit-room-name-input");
-const room_name_error_span = document.getElementById("room-name-error");
 
 const token = localStorage.getItem("access_token");
 
@@ -34,33 +24,6 @@ function show_notif(text){
 
 function close_notif(){
     notif_modal.classList.remove("show");
-}
-
-
-function showContextBox(x, y){
-    room_context_box.className = "show";
-    room_context_box.style.left = `${x}px`;
-    room_context_box.style.top = `${y}px`;
-}
-
-function hideContextBox(){
-    room_context_box.classList.remove("show");
-}
-
-function showEditModal(){
-    edit_modal_overlay.className = "show";
-}
-
-function hideEditModal(){
-    edit_modal_overlay.classList.remove("show");
-}
-
-function showErrorSpan(){
-    room_name_error_span.classList.add("error");
-}
-
-function hideErrorSpan(){
-    room_name_error_span.classList.remove("error");
 }
 
 
@@ -188,80 +151,6 @@ create_room_btn.addEventListener("click", async (e)=>{
     }
 })
 
-rename_room_btn.addEventListener("click", async ()=>{
-    checkLogin();
-
-    new_room_name = rename_input.value;
-
-    if(new_room_name.length !== 0){
-        const rename_room_response = await fetch(`/rooms/${selected_room_id}`,{
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                name: new_room_name
-            })
-        })
-
-
-        if(rename_room_response.ok){
-            document.querySelector(
-                `[data-room_id='${selected_room_id}'] div.room-info h3`
-            ).textContent = new_room_name;
-            hideEditModal();
-
-        }else if(rename_room_response.status === 404){
-            hideErrorSpan();
-            showErrorSpan();
-            room_name_error_span.textContent = "Room does not Exists!";
-        }else if(rename_room_response.status === 409){
-            hideErrorSpan();
-            showErrorSpan();
-            room_name_error_span.textContent = "a Room with this name already exists!";
-        }else if(rename_room_response.status === 403){
-            hideErrorSpan();
-            showErrorSpan();
-            room_name_error_span.textContent = "You do not have the premission to rename this room!";
-        }
-    }else{
-        hideErrorSpan();
-        showErrorSpan();
-        room_name_error_span.textContent = "this filed can not be empty!";
-    }
-})
-
-
-room_context_delete_btn.addEventListener("click", async ()=>{
-    checkLogin();
-
-    const delete_room_response = await fetch(`/rooms/${selected_room_id}`,{
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        }
-    })
-
-    if(delete_room_response.ok){
-        document.querySelector(
-        `[data-room_id='${selected_room_id}']`).remove();
-
-        hideEditModal();
-        hideContextBox();
-
-    }else if(delete_room_response.status === 404){
-        hideErrorSpan();
-        showErrorSpan();
-        room_name_error_span.textContent = "Room does not Exists!";
-    }else if(delete_room_response.status === 403){
-        hideErrorSpan();
-        showErrorSpan();
-        room_name_error_span.textContent = "You do not have the premission to remove this room!";
-    }
-})
-
 
 close_notif_btn.addEventListener("click", (e)=>{
     close_notif();
@@ -272,31 +161,6 @@ notif_modal.addEventListener("click", (e)=>{
         close_notif();
     }
 })
-
-room_context_edit_btn.addEventListener("click", ()=>{
-    rename_input.value = document.querySelector(
-                `[data-room_id='${selected_room_id}'] div.room-info h3`
-            ).textContent;
-    hideContextBox();
-    hideErrorSpan();
-    showEditModal();
-})
-
-edit_modal_overlay.addEventListener("click", (e)=>{
-    if(e.target === edit_modal_overlay){
-        hideEditModal();
-    }
-})
-
-close_modal_btn.addEventListener("click", ()=>{
-    hideEditModal();
-})
-
-document.addEventListener("click", (e) => {
-    if (!room_context_box.contains(e.target)) {
-        hideContextBox();
-    }
-});
 
 checkLogin();
 display_rooms();
