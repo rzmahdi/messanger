@@ -278,6 +278,12 @@ function renameRoom(room_name){
     }));
 }
 
+function deleteRoom(){
+    socket.send(JSON.stringify({
+        type: "delete_room"
+    }));
+}
+
 function updateMessageInDOM(content, message_id){
     document.querySelector(`[data-message_id='${message_id}'] p`).textContent = content;
     message_input.value = "";
@@ -400,14 +406,21 @@ socket.onmessage = (e)=>{
 
 
     if(data.type === "error"){
-        if(data.status === "409"){
-            hideErrorSpan();
-            showErrorSpan(data.content);
-        }
-
-        if(data.status === "403"){
-            hideErrorSpan();
-            showErrorSpan(data.content);
+        if(data.scope === "rename_room"){
+            if(data.status === "409"){
+                hideErrorSpan();
+                showErrorSpan(data.content);
+            }
+            
+            if(data.status === "403"){
+                hideErrorSpan();
+                showErrorSpan(data.content);
+            }
+        }else if(data.scope === "delete_room"){
+            if(data.status === "403"){
+                alert(data.content);
+                hideContextBox();
+            }
         }
     }
 }
@@ -453,6 +466,11 @@ room_context_edit_btn.addEventListener("click", ()=>{
     hideRoomContextBox();
     hideErrorSpan();
     showEditModal();
+})
+
+room_context_delete_btn.addEventListener("click", ()=>{
+    hideRoomContextBox();
+    deleteRoom();
 })
 
 rename_room_btn.addEventListener("click", async ()=>{
