@@ -255,8 +255,9 @@ function hideEditModal(){
     edit_modal_overlay.classList.remove("show");
 }
 
-function showErrorSpan(){
+function showErrorSpan(error_message=null){
     room_name_error_span.classList.add("error");
+    room_name_error_span.textContent = error_message;
 }
 
 function hideErrorSpan(){
