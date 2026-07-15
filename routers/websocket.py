@@ -110,6 +110,7 @@ async def handle_edit_room_name(data: dict, room_id: int, current_user, db):
             {
                 "type": "error",
                 "status": "409",
+                "scope": "rename_room",
                 "content": "room name already exists"
             }
         )
@@ -121,6 +122,7 @@ async def handle_edit_room_name(data: dict, room_id: int, current_user, db):
             {
                 "type": "error",
                 "status": "403",
+                "scope": "rename_room",
                 "content": "you do not have the permission"
             }
         )
