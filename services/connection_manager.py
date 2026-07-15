@@ -67,3 +67,15 @@ class ConnectionManager:
         for user in self.active_connections[room_id].values():
             for connection in user["connections"]:
                 await connection.send_json(message)
+    
+
+    async def send_to_user(self, room_id: int, user_id: int, message: dict[str, Any]):
+        if room_id not in self.active_connections:
+            return
+        
+        if user_id not in self.active_connections[room_id]:
+            return
+        
+        connections = self.active_connections[room_id][user_id]["connections"]
+        for connection in connections:
+            connection.send_json(message)
