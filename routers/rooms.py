@@ -50,3 +50,21 @@ def edit_room(
     db.refresh(room)
 
     return room
+
+@router.delete("/rooms/{room_id}")
+def delete_room(
+    request: Request,
+    room_id: int,
+    user: User=Depends(get_current_user),
+    db: Session=Depends(get_db)
+    ):
+
+    if not room_exist(room_id, db):
+        raise HTTPException(404, "Room does not exists!")
+    
+    room = db.query(Room).filter_by(id=room_id, created_by=user.id).first()
+    if not room:
+        raise HTTPException(403, "you can not delete this room!")
+    
+    db.delete(room)
+    db.commit()
