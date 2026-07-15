@@ -24,7 +24,7 @@ class Room(Base):
     created_at = Column(DateTime, default=datetime.now, nullable=False)
 
     creator = relationship("User", back_populates="rooms")
-    messages = relationship("Message", back_populates="room")
+    messages = relationship("Message", back_populates="room", cascade="all, delete-orphan")
 
 
 class Message(Base):
@@ -33,7 +33,7 @@ class Message(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     content = Column(Text, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
+    room_id = Column(Integer, ForeignKey("rooms.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(DateTime, default=datetime.now, nullable=False)
     is_edited = Column(Boolean, default=False, nullable=False)
 
