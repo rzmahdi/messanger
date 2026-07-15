@@ -395,6 +395,11 @@ socket.onmessage = (e)=>{
             hideErrorSpan();
             showErrorSpan(data.content);
         }
+
+        if(data.status === "403"){
+            hideErrorSpan();
+            showErrorSpan(data.content);
+        }
     }
 }
 
