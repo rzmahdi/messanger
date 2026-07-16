@@ -253,6 +253,7 @@ function editMessage(){
         content: message_input.value
     }));
 
+    message_input.value = "";
     autoResizeTextarea();
 }
 
