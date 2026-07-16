@@ -303,7 +303,10 @@ function hideErrorSpan(){
 }
 
 function showEditBox(){
-    edit_box.classList.add("show");
+    edit_box.classList.remove("disable");
+    setTimeout(() => {
+        edit_box.classList.add("show");
+    }, 10);
 }
 function hideEditBox(){
     edit_box.classList.add("show");
@@ -384,6 +387,7 @@ message_context_edit_btn.addEventListener("click", ()=>{
     hideContextBox();
     hideSendBtn();
     showEditdBtn();
+    showEditBox();
 
     message_input.focus();
 
