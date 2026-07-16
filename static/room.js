@@ -406,7 +406,7 @@ message_context_delete_btn.addEventListener("click", async()=>{
 })
 
 
-edit_message_btn.addEventListener("click", async ()=>{
+edit_message_btn.addEventListener("click", ()=>{
     checkLogin();
     editMessage();
     hideEditBox();
