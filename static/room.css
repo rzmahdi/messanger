@@ -557,6 +557,7 @@ div.edit-room-name-box{
     color: rgb(29, 163, 253);
     font-weight: bold;
     margin-bottom: 10px;
+    pointer-events: none;
 }
 
 #edit-box-close-btn{
