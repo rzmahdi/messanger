@@ -259,6 +259,24 @@ function showRoomContextBox(x, y){
     room_context_box.className = "show";
     room_context_box.style.left = `${x}px`;
     room_context_box.style.top = `${y}px`;
+
+    const room_context_box_rect = room_context_box.getBoundingClientRect();
+    const device_width = window.innerWidth;
+    const device_height = window.innerHeight;
+
+    let final_x = x;
+    let final_y = y;
+
+    if(room_context_box_rect.right >= device_width){
+        final_x = room_context_box_rect.left - room_context_box_rect.width;
+    }
+
+    if(room_context_box_rect.bottom > device_height){
+        final_y = room_context_box_rect.top - room_context_box_rect.height;
+    }
+
+    room_context_box.style.left = `${final_x}px`;
+    room_context_box.style.top = `${final_y}px`;
 }
 
 function hideRoomContextBox(){
