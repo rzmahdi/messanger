@@ -525,7 +525,7 @@ div.edit-room-name-box{
 
 #edit-box{
     height: 40px;
-    display: none;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
@@ -536,11 +536,16 @@ div.edit-room-name-box{
     transform: translate(0, 20px);
     transition: .2s ease;
 }
-
 #edit-box.show{
-    display: flex;
     transform: translate(0);
 }
+#edit-box.hide{
+    transform: translate(0);
+}
+#edit-box.disable{
+    display: none;
+}
+
 
 .edit-icon{
     margin-left: 15px;
