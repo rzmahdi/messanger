@@ -481,11 +481,6 @@ message_input.addEventListener("keydown", (e)=>{
 
 message_input.addEventListener("input", (e)=>{
     autoResizeTextarea();
-    if(message_input.value.length === 0){
-        is_editing = false;
-        hideEditBtn();
-        showSendBtn();
-    }
 });
 
 edit_modal_overlay.addEventListener("click", (e)=>{
