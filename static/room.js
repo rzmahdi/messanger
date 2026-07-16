@@ -222,8 +222,26 @@ function autoResizeTextarea(){
 
 function showContextBox(x, y){
     message_context_box.className = "show";
+    
     message_context_box.style.left = `${x}px`;
     message_context_box.style.top = `${y}px`;
+
+    const context_box_rect = message_context_box.getBoundingClientRect();
+    const container_rect = container.getBoundingClientRect();
+
+    let final_x = x;
+    let final_y = y;
+
+    if(context_box_rect.right > container_rect.right){
+        final_x = context_box_rect.left - context_box_rect.width;
+    }
+
+    if(context_box_rect.bottom > container_rect.height){
+        final_y = context_box_rect.top - context_box_rect.height;
+    }
+
+    message_context_box.style.left = `${final_x}px`;
+    message_context_box.style.top = `${final_y}px`;
 }
 
 function editMessage(){
