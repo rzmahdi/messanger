@@ -570,6 +570,8 @@ div.edit-room-name-box{
     outline: none;
 
     font-weight: bold;
+
+    cursor: pointer;
 }
 
 @media (max-width: 768px){
