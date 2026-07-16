@@ -398,7 +398,7 @@ message_context_edit_btn.addEventListener("click", ()=>{
     autoResizeTextarea();
 })
 
-message_context_delete_btn.addEventListener("click", async()=>{
+message_context_delete_btn.addEventListener("click", ()=>{
     hideContextBox();
     checkLogin();
 
