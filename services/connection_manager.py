@@ -28,11 +28,16 @@ class ConnectionManager:
     async def disconnect(self, room_id: int, user_id: int, websocket: WebSocket):
         if room_id not in self.active_connections:
             return
+        
+        if user_id not in self.active_connections[room_id]:
+            return
+
 
         is_last_connection = False
         connections = self.active_connections[room_id][user_id]["connections"]
-
-        connections.remove(websocket)
+        
+        if websocket in connections:
+            connections.remove(websocket)
 
         if(len(connections) == 0):
             is_last_connection = True
