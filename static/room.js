@@ -491,6 +491,7 @@ message_input.addEventListener("keydown", (e)=>{
     if(e.key === "Enter" && !e.shiftKey){
         e.preventDefault();
         if(is_editing){
+            hideEditBox();
             editMessage();
         }else{
             sendMessage();
