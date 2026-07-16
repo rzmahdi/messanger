@@ -21,6 +21,8 @@ const rename_room_btn = document.getElementById("modal-edit-room-name-btn");
 const rename_input = document.getElementById("edit-room-name-input");
 const room_name_error_span = document.getElementById("room-name-error");
 
+const edit_box = document.getElementById("edit-box");
+
 let oldest_message_id = null;
 let selected_message_id = null;
 let is_editing = null;
@@ -299,6 +301,14 @@ function showErrorSpan(error_message=null){
 function hideErrorSpan(){
     room_name_error_span.classList.remove("error");
 }
+
+function showEditBox(){
+    edit_box.classList.add("show");
+}
+function hideEditBox(){
+    edit_box.classList.add("show");
+}
+
 
 function deleteMessage(){
     socket.send(JSON.stringify({
