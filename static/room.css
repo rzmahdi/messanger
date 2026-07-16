@@ -552,7 +552,7 @@ div.edit-room-name-box{
     color: rgb(29, 163, 253);
 }
 
-#edit-text-place-holder{
+.edit-text-place-holder{
     padding: 5px;
     color: rgb(29, 163, 253);
     font-weight: bold;
