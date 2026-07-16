@@ -408,8 +408,9 @@ message_context_delete_btn.addEventListener("click", ()=>{
 
 edit_message_btn.addEventListener("click", ()=>{
     checkLogin();
-    editMessage();
     hideEditBox();
+
+    editMessage();
 })
 
 chat_title_container.addEventListener("click", (e)=>{
