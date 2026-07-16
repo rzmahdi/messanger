@@ -534,10 +534,12 @@ div.edit-room-name-box{
 
     background-color: rgba(0, 0, 0, 0.15);
     transform: translate(0, 20px);
-    transition: .2s ease;
+    opacity: 0;
+    transition: transform .2s ease, opacity 1s ease;
 }
 #edit-box.show{
     transform: translate(0);
+    opacity: 1;
 }
 #edit-box.disable{
     display: none;
