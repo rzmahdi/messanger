@@ -227,7 +227,7 @@ async def room_chat(websocket: WebSocket, room_id: int):
             elif event_type == "delete_room":
                 await handle_remove_room(data, room_id, current_user, db)
 
-    except WebSocketDisconnect:
+    except (WebSocketDisconnect, RuntimeError):
         pass
     finally:
         await manager.disconnect(
