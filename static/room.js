@@ -510,7 +510,6 @@ socket.onmessage = (e)=>{
 }
 
 socket.onclose = ()=>{
-    console.log("close");
     hideUserStatus();
     hideOnlineStatus();
     setTimeout(() => {
@@ -520,7 +519,6 @@ socket.onclose = ()=>{
 }
 
 socket.onopen = ()=>{
-    console.log("open");
     hideUserStatus();
     hideOfflineStatus();
     setTimeout(() => {
