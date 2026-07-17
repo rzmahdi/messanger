@@ -24,6 +24,11 @@ const room_name_error_span = document.getElementById("room-name-error");
 const edit_box = document.getElementById("edit-box");
 const close_edit_box_btn = document.getElementById("edit-box-close-btn");
 
+const user_status_container = document.getElementById("user-status-container");
+const online_container = document.getElementById("online-container");
+const offline_container = document.getElementById("offline-container");
+
+
 let oldest_message_id = null;
 let selected_message_id = null;
 let is_editing = null;
@@ -317,6 +322,26 @@ function hideEditBox(){
     }, 400);
 }
 
+function showUserStatus(){
+    user_status_container.classList.add("show");
+}
+function hideUserStatus(){
+    user_status_container.classList.remove("show");
+}
+
+function showOnlineStatus(){
+    online_container.classList.add("show");
+}
+function hideOnlineStatus(){
+    online_container.classList.remove("show");
+}
+
+function showOfflineStatus(){
+    offline_container.classList.add("show");
+}
+function hideOfflineStatus(){
+    offline_container.classList.remove("show");
+}
 
 function deleteMessage(){
     socket.send(JSON.stringify({
@@ -482,6 +507,26 @@ socket.onmessage = (e)=>{
             }
         }
     }
+}
+
+socket.onclose = ()=>{
+    console.log("close");
+    hideUserStatus();
+    hideOnlineStatus();
+    setTimeout(() => {
+        showOfflineStatus();
+        showUserStatus();
+    }, 10);
+}
+
+socket.onopen = ()=>{
+    console.log("open");
+    hideUserStatus();
+    hideOfflineStatus();
+    setTimeout(() => {
+        showOnlineStatus();
+        showUserStatus();
+    }, 10);
 }
 
 
