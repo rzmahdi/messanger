@@ -584,6 +584,40 @@ div.edit-room-name-box{
     background-color: rgba(204, 204, 204, 0.3);
 }
 
+
+.online-icon{
+    color: rgb(0, 182, 182);
+}
+
+.offline-icon{
+    color: red;
+}
+
+#user-status-container{
+    display: flex;
+    gap: .2rem;
+    transform: translate(0, 30px);
+    transition: .2s ease;
+}
+
+#user-status-container.show{
+    transform: translate(0);
+}
+
+#online-container{
+    display: none;
+}
+#online-container.show{
+    display: block;
+}
+
+#offline-container{
+    display: none;
+}
+#offline-container.show{
+    display: block;
+}
+
 @media (max-width: 768px){
     #chat-container{
         width: 95%;
