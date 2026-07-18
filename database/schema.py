@@ -17,7 +17,7 @@ class UserResponseSchema(UserBaseSchema):
 
 class Token(BaseModel):
     access_token: str
-    token_type: str
+    refresh_token: str
 
 class RoomResponseSchema(BaseModel):
     id: int
