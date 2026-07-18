@@ -117,7 +117,7 @@ search_room_input.addEventListener("input", async (e)=>{
 
 
 create_room_btn.addEventListener("click", async (e)=>{
-    if(!checkLogin()){
+    if(!await checkLogin()){
         window.location.href("/login");
     }
 
@@ -163,5 +163,5 @@ notif_modal.addEventListener("click", (e)=>{
     }
 })
 
-checkLogin();
+await checkLogin();
 display_rooms();
