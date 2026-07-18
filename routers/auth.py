@@ -7,7 +7,6 @@ from database.models import User
 from services.auth_service import hash_password, authenticate_user, create_access_token, get_current_user, create_refresh_token
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
-from datetime import timedelta
 
 router = APIRouter()
 
