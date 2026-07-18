@@ -51,6 +51,7 @@ login_form.addEventListener("submit", async (e)=>{
     if(response.ok){
         const data = await response.json();
         localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
 
         const user_response = await fetch("/me", {
             headers: {
