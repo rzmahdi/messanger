@@ -208,12 +208,13 @@ function addMessage(message, prepend = false){
         <span>${formatDate(message.created_at)}</span>
     `;
 
-    if(message.user.username === current_user.sub){
+    const username = message.user.username;
+    if(username === current_user.sub){
         div.classList.add("me");
     }else{
         const b = document.createElement("b");
-        b.textContent = message.user.username;
-        b.style.color = getUserColor(message.user.username);
+        b.textContent = username;
+        b.style.color = getUserColor(username);
         div.firstElementChild.prepend(b);
     }
 
