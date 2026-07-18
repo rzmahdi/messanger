@@ -27,6 +27,8 @@ const user_status_container = document.getElementById("user-status-container");
 const online_container = document.getElementById("online-container");
 const offline_container = document.getElementById("offline-container");
 
+const token = localStorage.getItem("access_token");
+
 
 let oldest_message_id = null;
 let selected_message_id = null;
