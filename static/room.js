@@ -36,10 +36,14 @@ let is_editing = null;
 
 chat_title_element.textContent = room_name;
 
+function redirect_to_login(){
+    window.location.href = "/login";
+}
+
 async function checkLogin(){
     const token = await getValidToken();
     if(!token){
-        window.location.href = "/login";
+        redirect_to_login()
         return
     }
 
@@ -52,7 +56,7 @@ async function checkLogin(){
     if(response.status === 401){
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
-        window.location.href = "/login";
+        redirect_to_login()
     }
 }
 checkLogin()
