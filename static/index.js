@@ -104,6 +104,7 @@ async function display_rooms(room_name = null){
 
 function logOut(){
     localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     redirect_to_login();
 }
 logout_btn.addEventListener("click", logOut);
