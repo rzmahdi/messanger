@@ -39,6 +39,15 @@ def create_access_token(username: str, user_id: int):
     encode = {"sub": username, "id": user_id, "exp": datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTE)}
     return jwt.encode(encode, SECRET_KEY, algorithm=ALGORITHM)
 
+def create_refresh_token(username: str, user_id: int):
+    payload = {
+        "sub": username,
+        "id": user_id,
+        "type": "refresh",
+        "exp": datetime.now(timezone.utc) + timedelta(days=REFRESH_TOKEN_EXPIRE_DAY)
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
 
 def get_user_from_token(token: str, db: Session):
     try:
