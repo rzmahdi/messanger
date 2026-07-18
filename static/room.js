@@ -213,6 +213,7 @@ function addMessage(message, prepend = false){
     }else{
         const b = document.createElement("b");
         b.textContent = message.user.username;
+        b.style.color = getUserColor(message.user.username);
         div.firstElementChild.prepend(b);
     }
 
