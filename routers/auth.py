@@ -1,10 +1,10 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.routing import APIRouter
 from sqlalchemy.orm import Session
-from database.schema import UserCreateSchema, Token
+from database.schema import UserCreateSchema, Token, RefreshTokenSchema
 from database.database import get_db
 from database.models import User
-from services.auth_service import hash_password, authenticate_user, create_access_token, get_current_user, create_refresh_token
+from services.auth_service import hash_password, authenticate_user, create_access_token, get_current_user, create_refresh_token, get_user_from_token
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
 
@@ -41,6 +41,17 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Sessio
         "access_token": access_token,
         "refresh_token": refresh_token,
         }
+
+
+@router.post("/refresh")
+def refresh_token_endpoint(request: RefreshTokenSchema, db: Session=Depends(get_db)):
+    user = get_user_from_token(request.refresh_token, db, is_refresh=True)
+
+    if not user:
+        raise HTTPException(401, "User not found!")
+
+    new_access_token = create_access_token(user.username, user.id)
+    return {"access_token": new_access_token}
 
 
 @router.get("/me")
