@@ -128,9 +128,6 @@ create_room_btn.addEventListener("click", async (e)=>{
         return
     }
 
-    rooms_response = await fetch(`/rooms?room_name=${room_name}`);
-    rooms = await rooms_response.json();
-
     const create_room_response = await fetch("/rooms",{
         method: "POST",
         headers: {
