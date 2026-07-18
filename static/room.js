@@ -30,6 +30,17 @@ const offline_container = document.getElementById("offline-container");
 const token = localStorage.getItem("access_token");
 const current_user = parseJwt(token);
 
+const username_colors = [
+    "#ffae00",
+    "#ff6b6b",
+    "#4ecdc4",
+    "#a78bfa",
+    "#60a5fa",
+    "#34d399",
+    "#f472b6",
+    "#fbbf24",
+];
+
 
 let oldest_message_id = null;
 let selected_message_id = null;
@@ -154,6 +165,12 @@ async function initRoom(){
         }, 10);
     };
 }
+
+
+function getUserColor(username){
+    return username_colors[username.charCodeAt()%username_colors.length];
+}
+
 
 
 function formatDate(dateString) {
