@@ -55,7 +55,7 @@ def create_refresh_token(username: str, user_id: int):
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
 
-def get_user_from_token(token: str, db: Session):
+def get_user_from_token(token: str, db: Session, is_refresh=False):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
@@ -63,6 +63,10 @@ def get_user_from_token(token: str, db: Session):
 
         if username is None or user_id is None:
             raise HTTPException(401, "Could not validate user!")
+        
+        if is_refresh:
+            if payload.get("type") != "refresh":
+                raise HTTPException(401, "Invalid token type")
 
         user = db.query(User).filter_by(id=user_id).first()
         if not user:
