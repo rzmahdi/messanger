@@ -28,6 +28,7 @@ const online_container = document.getElementById("online-container");
 const offline_container = document.getElementById("offline-container");
 
 const token = localStorage.getItem("access_token");
+const current_user = parseJwt(token);
 
 
 let oldest_message_id = null;
@@ -60,19 +61,6 @@ async function checkLogin(){
     }
 }
 checkLogin()
-
-
-function parseJwt(token){
-    try {
-        const base64Payload = token.split(".")[1];
-        const payload = JSON.parse(atob(base64Payload.replace(/-/g, "+").replace(/_/g, "/")));
-        return payload;
-    } catch(err){
-        console.error("Invalid token:", err);
-        return null;
-    }
-}
-const current_user = parseJwt(token);
 
 function formatDate(dateString) {
     return new Date(dateString).toLocaleTimeString([], {
