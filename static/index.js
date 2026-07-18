@@ -163,5 +163,5 @@ notif_modal.addEventListener("click", (e)=>{
     }
 })
 
-await checkLogin();
+checkLogin();
 display_rooms();
