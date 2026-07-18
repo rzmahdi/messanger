@@ -118,7 +118,7 @@ search_room_input.addEventListener("input", async (e)=>{
 
 create_room_btn.addEventListener("click", async (e)=>{
     if(!await checkLogin()){
-        window.location.href("/login");
+        window.location.href = "/login";
     }
 
     room_name = search_room_input.value;
