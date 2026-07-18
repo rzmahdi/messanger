@@ -104,7 +104,7 @@ async function display_rooms(room_name = null){
 
 function logOut(){
     localStorage.removeItem("access_token");
-    window.location.href = "/login";
+    redirect_to_login();
 }
 logout_btn.addEventListener("click", logOut);
 
@@ -118,7 +118,8 @@ search_room_input.addEventListener("input", async (e)=>{
 
 create_room_btn.addEventListener("click", async (e)=>{
     if(!await checkLogin()){
-        window.location.href = "/login";
+        redirect_to_login();
+
     }
 
     room_name = search_room_input.value;
