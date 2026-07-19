@@ -1,7 +1,13 @@
 from fastapi import Depends, HTTPException, status, Request
 from fastapi.routing import APIRouter
 from sqlalchemy.orm import Session
-from database.schema import UserCreateSchema, Token, RefreshTokenSchema, UserForgotPasswordSchema
+from database.schema import (
+    UserCreateSchema,
+    Token,
+    RefreshTokenSchema,
+    UserForgotPasswordSchema,
+    UserResetPasswordSchema
+)
 from database.database import get_db
 from database.models import User
 from services.auth_service import (
@@ -116,3 +122,17 @@ def verify_security_answer(request: UserForgotPasswordSchema, db:Session=Depends
 
     reset_token = create_reset_password_token(user.username, user.id)
     return {"reset_token": reset_token}
+
+
+@router.post("/forgot-password/reset")
+def reset_password(request: UserResetPasswordSchema, db: Session=Depends(get_db)):
+    reset_token = request.reset_token
+    new_password = request.new_password
+
+    if not reset_token or not new_password:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "reset_token or new_password are empty!")
+
+    user = get_user_from_token(reset_token, db)
+    user.password_hash = hash_password(new_password)
+    db.commit()
+    db.refresh(user)
