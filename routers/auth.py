@@ -11,7 +11,8 @@ from services.auth_service import (
     get_current_user,
     create_refresh_token,
     get_user_from_token,
-    create_reset_password_token
+    create_reset_password_token,
+    verify_password
 )
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
@@ -110,7 +111,7 @@ def verify_security_answer(request: UserForgotPasswordSchema, db:Session=Depends
     if not user:
         raise HTTPException(404, "User Not Found!")
 
-    if hash_password(security_answer) != user.security_answer_hash:
+    if not verify_password(security_answer, user.security_answer_hash):
         raise HTTPException(403, "Incorrect Answer!")
 
     reset_token = create_reset_password_token(user.username, user.id)
