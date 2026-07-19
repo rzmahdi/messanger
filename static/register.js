@@ -72,6 +72,8 @@ register_form.addEventListener("submit", async (e)=>{
     const username = document.getElementById("register-username").value;
     const password = document.getElementById("register-password").value;
     const confirm_password = document.getElementById("register-confirm-password").value;
+    const security_question = select.value;
+    const security_answer = register_security_answer.value;
 
     if(!username){
         register_empty_username_span.classList.add("error");
@@ -117,6 +119,8 @@ register_form.addEventListener("submit", async (e)=>{
         body: JSON.stringify({
             username,
             password,
+            security_question,
+            security_answer
         })
     })
 
