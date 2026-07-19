@@ -8,7 +8,7 @@ const register_close_notif_btn = document.getElementById("register-modal-notif-c
 
 const select = document.getElementById("register-security-question");
 const register_security_answer = document.getElementById("register-security-answer");
-const answer_emprt_span = document.getElementById("answer-empty-span");
+const answer_empty_span = document.getElementById("answer-empty-span");
 const question_invalid_span = document.getElementById("question-invalid-span");
 
 let register_status = false;
@@ -56,9 +56,9 @@ function close_notif(){
 
 async function loadSecurityQuestions(){
     const res = await fetch("/security_questions");
-    const security_questins = await res.json();
+    const security_questions = await res.json();
 
-    security_questins.questions.forEach(question => {
+    security_questions.questions.forEach(question => {
         const option = document.createElement("option");
         option.value = question;
         option.textContent = question;
@@ -104,10 +104,10 @@ register_form.addEventListener("submit", async (e)=>{
     }
 
     if(!answer_validation()){
-        answer_emprt_span.classList.add("error");
+        answer_empty_span.classList.add("error");
         return
     }else{
-        answer_emprt_span.classList.remove("error");
+        answer_empty_span.classList.remove("error");
     }
 
 
