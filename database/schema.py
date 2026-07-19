@@ -1,11 +1,15 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class UserBaseSchema(BaseModel):
     username: str
 
 class UserCreateSchema(UserBaseSchema):
     password: str
+    security_question: str
+    security_answer: str
+
 
 class UserLoginSchema(UserBaseSchema):
     password: str
