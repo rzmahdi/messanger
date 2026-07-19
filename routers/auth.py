@@ -103,7 +103,7 @@ def verify_security_answer(request: UserForgotPasswordSchema, db:Session=Depends
     username = request.username
     security_answer = request.security_answer.strip().lower()
 
-    if not username or security_answer:
+    if not username or not security_answer:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "username or answer can not be empty!")
     
     user = db.query(User).filter_by(username=username).first()
