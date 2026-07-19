@@ -8,6 +8,8 @@ const register_close_notif_btn = document.getElementById("register-modal-notif-c
 
 const select = document.getElementById("register-security-question");
 const register_security_answer = document.getElementById("register-security-answer");
+const answer_emprt_span = document.getElementById("answer-empty-span");
+const question_invalid_span = document.getElementById("question-invalid-span");
 
 let register_status = false;
 
@@ -30,6 +32,11 @@ function password_validation(password){
 
 function check_password(password, confirm_password){
     return password === confirm_password
+}
+
+function question_validation(){
+    if(select.selectedIndex === 0) return false;
+    return true;
 }
 
 function show_notif(text){
