@@ -21,6 +21,10 @@ class UserResponseSchema(UserBaseSchema):
 class UserForgotPasswordSchema(UserBaseSchema):
     security_answer: str
 
+class UserResetPasswordSchema(BaseModel):
+    new_password: str
+    reset_token: str
+
 class Token(BaseModel):
     access_token: str
     refresh_token: str
