@@ -80,12 +80,11 @@ def me(current_user=Depends(get_current_user)):
 @router.get("/forgot-password/{username}")
 def get_user_security_question(
     username: str,
-    current_user: User=Depends(get_current_user),
     db:Session=Depends(get_db)
     ):
     user = db.query(User).filter_by(username=username).first()
 
-    if username != current_user.username:
-        raise HTTPException(status.HTTP_403_FORBIDDEN, "Access Denied!")
+    if not user:
+        raise HTTPException(404, "User Not Found!")
 
     return {"question": user.security_question}
