@@ -1,7 +1,15 @@
 from database.database import Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Boolean, Enum
 from sqlalchemy.orm import relationship
 from datetime import datetime
+
+SECURITY_QUESTIONS = [
+    "What is the name of your first pet?",
+    "What is the name of the city where you were born?",
+    "What was the name of your favorite teacher at school?",
+    "What was the name of the first school you went to?",
+    "What is your favorite food?",
+]
 
 
 class User(Base):
@@ -11,6 +19,18 @@ class User(Base):
     username = Column(String(40), unique=True, nullable=False)
     password_hash = Column(String(200), nullable=False)
     created_at = Column(DateTime, default=datetime.now, nullable=False)
+
+    security_question = Column(
+        Enum(
+            *SECURITY_QUESTIONS,
+            name="security_questions",
+            native_enum = False,
+            create_constraint=True,
+            validate_strings=True,            
+            ),
+        nullable=False
+    )
+    security_answer_hash = Column(String(50), nullable=False)
 
     rooms = relationship("Room", back_populates="creator")
     messages = relationship("Message", back_populates="user")
