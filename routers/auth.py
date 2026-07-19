@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.routing import APIRouter
 from sqlalchemy.orm import Session
 from database.schema import UserCreateSchema, Token, RefreshTokenSchema
@@ -10,6 +10,11 @@ from typing import Annotated
 from database.models import SECURITY_QUESTIONS
 
 router = APIRouter()
+
+
+@router.get("/security_questions")
+def get_security_questions():
+    return {"questions": SECURITY_QUESTIONS}
 
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
