@@ -39,6 +39,11 @@ function question_validation(){
     return true;
 }
 
+function answer_validation(){
+    if(register_security_answer.value.length === 0) return false;
+    return true;
+}
+
 function show_notif(text){
     register_notif_modal.classList.add("show");
     register_notif_text.innerHTML = text;
