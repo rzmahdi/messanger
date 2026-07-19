@@ -85,14 +85,22 @@ body{
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-#passwords-not-match, #register-empty-username, #register-password-invalid{
+#passwords-not-match,
+#register-empty-username,
+#register-password-invalid,
+#answer-empty-span,
+#question-invalid-span{
     display: none;
     color: red;
     font-weight: bold;
     animation: show_password_error .5s ease;
     width: 80%;
 }
-#passwords-not-match.error, #register-empty-username.error, #register-password-invalid.error{
+#passwords-not-match.error,
+#register-empty-username.error,
+#register-password-invalid.error,
+#answer-empty-span.error,
+#question-invalid-span.error{
     display: block;
 }
 
