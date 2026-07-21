@@ -63,3 +63,9 @@ function show_security_question(question){
 function hide_sequrity_question(){
     security_question_span.classList.remove("show");
 }
+
+
+function password_validation(password){
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+    return passwordRegex.test(password);
+}
