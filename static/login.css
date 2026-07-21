@@ -140,7 +140,7 @@ div.login-modal-notif-box span{
 }
 
 #register-text{
-    margin-top: 3rem;
+    margin-top: 1rem;
     color: rgba(255, 255, 255, 0.726);
 }
 
@@ -149,6 +149,19 @@ div.login-modal-notif-box span{
 }
 
 #register-link:hover{
+    color: orangered
+}
+
+#password-reset-text{
+    margin-top: 3rem;
+    color: rgba(255, 255, 255, 0.726);
+}
+
+#reset-link{
+    color: rgba(255, 255, 255, 0.726);
+}
+
+#reset-link:hover{
     color: orangered
 }
 
