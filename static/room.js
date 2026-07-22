@@ -108,6 +108,12 @@ async function initRoom(){
             if(should_scroll) scrollToBottom();
         }
 
+        if(data.type === "message-reply"){
+            const should_scroll = isNearBottom();
+            addMessage(data, false, true);
+            if(should_scroll) scrollToBottom();
+        }
+
         if(data.type == "edit"){
             updateMessageInDOM(data.content, data.id);
         }
@@ -201,7 +207,7 @@ async function loadMessages(){
     scrollToBottom();
 }
 
-function addMessage(message, prepend = false){
+function addMessage(message, prepend = false, reply=false){
     const container = document.getElementById("messages");
 
     const message_container = document.createElement("div");
@@ -219,6 +225,23 @@ function addMessage(message, prepend = false){
         </div>
         <span>${formatDate(message.created_at)}</span>
     `;
+
+    if(reply){
+        const reply_div = document.createElement("div");
+        const reply_div_username = document.createElement("p");
+        const reply_div_text = document.createElement("p");
+
+        reply_div.className = "message-reply-container";
+        reply_div_username.className = "message-reply-username";
+        reply_div_text.className = "message-reply-text";
+
+        reply_div_username.textContent = message.user.username;
+
+        reply_div.appendChild(reply_div_username);
+        reply_div.appendChild(reply_div_text);
+
+        div.prepend(reply_div);
+    }
 
     const username = message.user.username;
     if(username === current_user.sub){
@@ -291,6 +314,7 @@ function sendMessage(){
             content: message,
             reply_id: selected_message_id
         }));
+        return;
     }
 
     socket.send(JSON.stringify({
