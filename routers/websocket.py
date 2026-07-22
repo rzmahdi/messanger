@@ -34,7 +34,7 @@ async def handle_reply_message(data: dict, room_id: int, current_user, db):
     await manager.broadcast(
         room_id,
         {
-            "type": "message-reply",
+            "type": "message",
             "id": new_message.id,
             "content": new_message.content,
             "room_id": room_id,
