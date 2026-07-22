@@ -143,13 +143,13 @@ body{
     line-height: 1;
 }
 
-#messages .message.me.remove{
+#messages .message-container.me.remove{
     opacity: 0;
     transform: translate(5px);
     transition: .2s ease;
 }
 
-#messages .message.remove:not(.me){
+#messages .message-container.remove:not(.me){
     opacity: 0;
     transform: translate(-5px);
     transition: .2s ease;
