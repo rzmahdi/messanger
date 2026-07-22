@@ -237,6 +237,8 @@ function addMessage(message, prepend = false){
 
         if(div.classList.contains("me"))
             reply_div.style.background = getUserColor(message.reply.user.username)+"25";
+        
+        reply_div.style.borderColor = getUserColor(message.reply.user.username);
 
 
         reply_div_text.textContent = document.querySelector(`.message[data-message_id='${message.reply_id}'] p`).textContent;
