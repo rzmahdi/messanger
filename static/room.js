@@ -243,6 +243,8 @@ function addMessage(message, prepend = false){
         showReplyBox();
         hideEditBox();
         hideContextBox();
+
+        is_replied = true;
         selected_message_id = message.id;
         reply_username_placeholder.textContent = `Reply To ${username}`;
         replied_message_content_placeholder.textContent = message.content;
@@ -473,14 +475,12 @@ function hideEditBox(){
 }
 
 function showReplyBox(){
-    is_replied = true;
     reply_box.classList.remove("disable");
     setTimeout(() => {
         reply_box.classList.add("show");
     }, 10);
 }
 function hidereplyBox(){
-    is_replied = false;
     reply_box.classList.remove("show");
     setTimeout(() => {
         reply_box.classList.add("disable");
@@ -644,6 +644,7 @@ message_input.addEventListener("keydown", (e)=>{
         }else if(is_replied){
             hidereplyBox();
             sendMessage();
+            is_replied = false;
         }else{
             sendMessage();
         }
@@ -712,6 +713,7 @@ close_edit_box_btn.addEventListener("click", ()=>{
 });
 close_reply_box_btn.addEventListener("click", ()=>{
     message_input.value = "";
+    is_replied = false;
     hidereplyBox();
 })
 
