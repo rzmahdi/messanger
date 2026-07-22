@@ -8,13 +8,47 @@ manager = ConnectionManager()
 router = APIRouter()
 
 
+async def handle_reply_message(data: dict, room_id: int, current_user, db):
+    content = data.get("content")
+    if not content:
+        return
+
+    reply_id = data.get("reply_id")
+    if not reply_id:
+        return
+    
+    room = db.query(Room).filter_by(id=room_id).first()
+    if not room:
+        return
+
+    new_message = Message(
+        user_id=current_user.id, room_id=room_id, content=content, reply_id=reply_id
+    )
+
+    db.add(new_message)
+    db.commit()
+    db.refresh(new_message)
+
+    await manager.broadcast(
+        room_id,
+        {
+            "type": "message-reply",
+            "id": new_message.id,
+            "content": new_message.content,
+            "room_id": room_id,
+            "reply_id": reply_id,
+            "created_at": str(new_message.created_at),
+            "user": {"id": current_user.id, "username": current_user.username},
+        },
+    )
+
+
 async def handle_new_message(data: dict, room_id: int, current_user, db):
     content = data.get("content")
     if not content:
         return
 
-    reply_id = data.get("reply_id", False)
-    
+
     room = db.query(Room).filter_by(id=room_id).first()
     if not room:
         return
@@ -22,8 +56,6 @@ async def handle_new_message(data: dict, room_id: int, current_user, db):
     new_message = Message(
         user_id=current_user.id, room_id=room_id, content=content
     )
-    if reply_id:
-        new_message.reply_id = reply_id
 
     db.add(new_message)
     db.commit()
@@ -36,7 +68,6 @@ async def handle_new_message(data: dict, room_id: int, current_user, db):
             "id": new_message.id,
             "content": new_message.content,
             "room_id": room_id,
-            "reply_id": reply_id,
             "created_at": str(new_message.created_at),
             "user": {"id": current_user.id, "username": current_user.username},
         },
@@ -231,6 +262,8 @@ async def room_chat(websocket: WebSocket, room_id: int):
                 await handle_edit_room_name(data, room_id, current_user, db)
             elif event_type == "delete_room":
                 await handle_remove_room(data, room_id, current_user, db)
+            elif event_type == "reply":
+                await handle_reply_message(data, room_id, current_user, db)
 
     except (WebSocketDisconnect, RuntimeError):
         pass
