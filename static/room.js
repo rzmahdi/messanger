@@ -240,6 +240,7 @@ function addMessage(message, prepend = false){
     message_container.addEventListener("dblclick", (e)=>{
         e.preventDefault();
         showReplyBox();
+        hideEditBox();
         hideContextBox();
         reply_username_placeholder.textContent = `Reply To ${username}`;
         replied_message_content_placeholder.textContent = message.content;
@@ -586,6 +587,7 @@ message_context_edit_btn.addEventListener("click", ()=>{
     is_editing = true;
     hideContextBox();
     hideSendBtn();
+    hidereplyBox();
     showEditdBtn();
     showEditBox();
 
