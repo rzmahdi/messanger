@@ -241,7 +241,7 @@ function addMessage(message, prepend = false){
         e.preventDefault();
         showReplyBox();
         hideContextBox();
-        reply_username_placeholder.textContent += username;
+        reply_username_placeholder.textContent = `Reply To ${username}`;
         replied_message_content_placeholder.textContent = message.content;
     });
 
@@ -693,6 +693,10 @@ close_edit_box_btn.addEventListener("click", ()=>{
     showSendBtn();
     is_editing = false;
 });
+close_reply_box_btn.addEventListener("click", ()=>{
+    message_input.value = "";
+    hidereplyBox();
+})
 
 document.addEventListener("click", (e) => {
     if (!message_context_box.contains(e.target)) {
