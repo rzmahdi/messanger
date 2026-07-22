@@ -278,6 +278,7 @@ function addMessage(message, prepend = false){
 
         is_replied = true;
         selected_message_id = message.id;
+        message_input.focus();
         reply_username_placeholder.textContent = `Reply To ${username}`;
         replied_message_content_placeholder.textContent = message.content;
     });
