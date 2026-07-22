@@ -202,7 +202,6 @@ async function loadMessages(){
 }
 
 function addMessage(message, prepend = false){
-    console.log(message);
     const container = document.getElementById("messages");
 
     const message_container = document.createElement("div");
