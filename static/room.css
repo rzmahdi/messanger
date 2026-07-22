@@ -519,7 +519,8 @@ div.edit-room-name-box{
     scale: .96;
 }
 
-#edit-box{
+#edit-box,
+#reply-box{
     height: 0px;
     display: flex;
     flex-direction: row;
@@ -532,26 +533,31 @@ div.edit-room-name-box{
     opacity: 0;
     transition: all .2s ease;
 }
-#edit-box.show{
+#edit-box.show,
+#reply-box.show{
     height: 40px;
     opacity: 1;
 }
-#edit-box.disable{
+#edit-box.disable,
+#reply-box.disable{
     display: none;
 }
 
 
-.edit-icon{
+.edit-icon,
+.reply-icon{
     margin-left: 15px;
     display: flex;
     align-items: center;
 }
 
-#edit-box svg{
+#edit-box svg,
+#reply-box svg{
     color: rgb(29, 163, 253);
 }
 
-.edit-text-place-holder{
+.edit-text-place-holder,
+.reply-text-place-holder{
     padding: 5px;
     color: rgb(29, 163, 253);
     font-weight: bold;
@@ -559,6 +565,7 @@ div.edit-room-name-box{
     pointer-events: none;
 }
 
+#reply-box-close-btn,
 #edit-box-close-btn{
     width: 25px;
     padding: 5px;
@@ -576,7 +583,8 @@ div.edit-room-name-box{
     cursor: pointer;
 }
 
-#edit-box-close-btn:active{
+#edit-box-close-btn:active,
+#reply-box-close-btn:active{
     background-color: rgba(204, 204, 204, 0.3);
 }
 
