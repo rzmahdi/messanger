@@ -325,6 +325,7 @@ function sendMessage(){
             reply_id: selected_message_id
         }));
         message_input.value = "";
+        hideReplyBox();
         return;
     }
 
