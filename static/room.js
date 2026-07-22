@@ -545,13 +545,13 @@ function deleteRoom(){
 }
 
 function updateMessageInDOM(content, message_id){
-    document.querySelector(`[data-message_id='${message_id}'] p`).textContent = content;
+    document.querySelector(`.message[data-message_id='${message_id}'] p`).textContent = content;
     message_input.value = "";
     hideEditBtn();
     showSendBtn();
     is_editing = false;
 
-    const div = document.querySelector(`[data-message_id='${message_id}']`);
+    const div = document.querySelector(`.message[data-message_id='${message_id}']`);
 
     if(div.lastChild.textContent !== "edited"){
         const span = document.createElement("span");
