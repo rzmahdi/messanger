@@ -582,6 +582,9 @@ div.edit-room-name-box{
     margin-bottom: 30px;
     pointer-events: none;
 }
+.edit-text-place-holder{
+    margin-bottom: 20px;
+}
 
 #reply-box-close-btn,
 #edit-box-close-btn{
