@@ -620,21 +620,23 @@ div.edit-room-name-box{
     cursor: default;
 }
 
-.message-reply-container{
+.message-container .message-reply-container{
     margin: 2px;
     padding: 2px;
 
     border-radius: 5px;
     border-left: 2px solid white;
 
-    background: rgb(255 255 255 / 10%);
-
     overflow: hidden;
     max-height: 50px;
 }
 
-.message-reply-username{
-    font-weight: bold;
+.message-container .message-reply-container{
+    background: rgba(0, 235, 252, 0.1);
+}
+
+.message-container.me .message-reply-container{
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .online-icon{
