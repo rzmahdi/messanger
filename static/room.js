@@ -235,7 +235,16 @@ function addMessage(message, prepend = false, reply=false){
         reply_div_username.className = "message-reply-username";
         reply_div_text.className = "message-reply-text";
 
-        reply_div_username.textContent = message.user.username;
+        replied_message = document.querySelector(`.message[data-message_id='${selected_message_id}']`);
+
+        if(replied_message.classList.contains("me")){
+            reply_div_username.textContent = message.user.username;
+        }else{
+            reply_div_username.textContent = document.querySelector(`.message[data-message_id='${selected_message_id}'] b`).textContent;
+        }
+
+        reply_div_text.textContent = document.querySelector(`.message[data-message_id='${selected_message_id}'] p`).textContent;
+        reply_div_text.dir = "auto";
 
         reply_div.appendChild(reply_div_username);
         reply_div.appendChild(reply_div_text);
