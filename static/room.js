@@ -108,12 +108,6 @@ async function initRoom(){
             if(should_scroll) scrollToBottom();
         }
 
-        if(data.type === "message-reply"){
-            const should_scroll = isNearBottom();
-            addMessage(data, false, true);
-            if(should_scroll) scrollToBottom();
-        }
-
         if(data.type == "edit"){
             updateMessageInDOM(data.content, data.id);
         }
@@ -207,7 +201,7 @@ async function loadMessages(){
     scrollToBottom();
 }
 
-function addMessage(message, prepend = false, reply=false){
+function addMessage(message, prepend = false){
     const container = document.getElementById("messages");
 
     const message_container = document.createElement("div");
@@ -226,31 +220,31 @@ function addMessage(message, prepend = false, reply=false){
         <span>${formatDate(message.created_at)}</span>
     `;
 
-    if(reply){
-        const reply_div = document.createElement("div");
-        const reply_div_username = document.createElement("p");
-        const reply_div_text = document.createElement("p");
+        if(message.reply_id){
+            const el = document.querySelector(`[data-message_id='${message.reply_id}']`);
+            console.log(message);
+            if(!el) return;
 
-        reply_div.className = "message-reply-container";
-        reply_div_username.className = "message-reply-username";
-        reply_div_text.className = "message-reply-text";
+            const reply_div = document.createElement("div");
+            const reply_div_username = document.createElement("p");
+            const reply_div_text = document.createElement("p");
 
-        replied_message = document.querySelector(`.message[data-message_id='${selected_message_id}']`);
+            reply_div.className = "message-reply-container";
+            reply_div_username.className = "message-reply-username";
+            reply_div_text.className = "message-reply-text";
 
-        if(replied_message.classList.contains("me")){
-            reply_div_username.textContent = message.user.username;
-        }else{
-            reply_div_username.textContent = document.querySelector(`.message[data-message_id='${selected_message_id}'] b`).textContent;
+            reply_div_username.textContent = message.replied_user.username;
+
+
+            reply_div_text.textContent = document.querySelector(`.message[data-message_id='${message.reply_id}'] p`).textContent;
+            reply_div_text.dir = "auto";
+
+            reply_div.appendChild(reply_div_username);
+            reply_div.appendChild(reply_div_text);
+
+            div.firstElementChild.prepend(reply_div);
         }
 
-        reply_div_text.textContent = document.querySelector(`.message[data-message_id='${selected_message_id}'] p`).textContent;
-        reply_div_text.dir = "auto";
-
-        reply_div.appendChild(reply_div_username);
-        reply_div.appendChild(reply_div_text);
-
-        div.prepend(reply_div);
-    }
 
     const username = message.user.username;
     if(username === current_user.sub){
@@ -269,6 +263,7 @@ function addMessage(message, prepend = false, reply=false){
         span.textContent = "edited";
         div.appendChild(span);
     }
+
 
     message_container.addEventListener("dblclick", (e)=>{
         e.preventDefault();
