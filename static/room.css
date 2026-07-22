@@ -543,11 +543,19 @@ div.edit-room-name-box{
     opacity: 0;
     transition: all .2s ease;
 }
-#edit-box.show,
-#reply-box.show{
+#reply-box{
+    position: relative;
+}
+
+#edit-box.show{
     height: 40px;
     opacity: 1;
 }
+#reply-box.show{
+    height: 60px;
+    opacity: 1;
+}
+
 #edit-box.disable,
 #reply-box.disable{
     display: none;
@@ -571,7 +579,7 @@ div.edit-room-name-box{
     padding: 5px;
     color: rgb(29, 163, 253);
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     pointer-events: none;
 }
 
@@ -596,6 +604,16 @@ div.edit-room-name-box{
 #edit-box-close-btn:active,
 #reply-box-close-btn:active{
     background-color: rgba(204, 204, 204, 0.3);
+}
+
+#replied-message {
+    width: 70%;
+    white-space: nowrap;
+    color: rgb(209, 209, 209);
+    position: absolute;
+    bottom: 15px;
+    left: 40px;
+    overflow: hidden;
 }
 
 
