@@ -200,9 +200,12 @@ async function loadMessages(){
 function addMessage(message, prepend = false){
     const container = document.getElementById("messages");
 
+    const message_container = document.createElement("div");
+    message_container.className = "message-container";
+    message_container.dataset.message_id = message.id;
+
     const div = document.createElement("div");
     div.className = "message";
-    div.dataset.message_id = message.id;
 
     div.innerHTML = `
         <div>
@@ -214,6 +217,7 @@ function addMessage(message, prepend = false){
     const username = message.user.username;
     if(username === current_user.sub){
         div.classList.add("me");
+        message_container.classList.add("me");
     }else{
         const b = document.createElement("b");
         b.textContent = username;
@@ -241,14 +245,16 @@ function addMessage(message, prepend = false){
         }
     });
 
+    message_container.appendChild(div);
+
 
     if(prepend){
-        container.prepend(div);
+        container.prepend(message_container);
     }else {
-        container.appendChild(div);
+        container.appendChild(message_container);
     }
 
-    return div;
+    return message_container;
 }
 
 function sendMessage(){
