@@ -617,6 +617,7 @@ div.edit-room-name-box{
     bottom: 15px;
     left: 40px;
     overflow: hidden;
+    cursor: default;
 }
 
 
