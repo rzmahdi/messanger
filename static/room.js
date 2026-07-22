@@ -233,6 +233,8 @@ function addMessage(message, prepend = false){
             reply_div_text.className = "message-reply-text";
 
             reply_div_username.textContent = message.reply.user.username;
+            reply_div_username.style.color = getUserColor(message.reply.user.username);
+            reply_div.style.background = getUserColor(message.reply.user.username)+"25";
 
 
             reply_div_text.textContent = document.querySelector(`.message[data-message_id='${message.reply_id}'] p`).textContent;
