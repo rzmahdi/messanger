@@ -25,6 +25,8 @@ const close_edit_box_btn = document.getElementById("edit-box-close-btn");
 
 const reply_box = document.getElementById("reply-box");
 const close_reply_box_btn = document.getElementById("reply-box-close-btn");
+const reply_username_placeholder = document.getElementById("reply-username-placeholder");
+
 
 const user_status_container = document.getElementById("user-status-container");
 const online_container = document.getElementById("online-container");
@@ -238,6 +240,7 @@ function addMessage(message, prepend = false){
         e.preventDefault();
         showReplyBox();
         hideContextBox();
+        reply_username_placeholder.textContent += username;
     });
 
 
