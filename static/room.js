@@ -234,6 +234,12 @@ function addMessage(message, prepend = false){
         div.appendChild(span);
     }
 
+    message_container.addEventListener("dblclick", (e)=>{
+        e.preventDefault();
+        showReplyBox();
+        hideContextBox();
+    });
+
 
     div.addEventListener("click", (e)=>{
         if(div.classList.contains("me")){
