@@ -42,15 +42,26 @@ class RoomCreateSchema(BaseModel):
 class RoomEditSchema(BaseModel):
     name: str
 
+class ReplyPreviewSchema(BaseModel):
+    id: int
+    user: UserBaseSchema
+
+    class Config:
+        from_attributes = True
 
 class MessageResponseSchema(BaseModel):
     id: int
     content: str
     user_id: int
     room_id: int
+    reply_id: int | None
     created_at: datetime
     is_edited: bool
     user: UserBaseSchema
+    reply: ReplyPreviewSchema | None = None
+
+    class Config:
+        from_attributes = True
 
 class MessageCreateSchema(BaseModel):
     content: str
