@@ -222,7 +222,6 @@ function addMessage(message, prepend = false){
 
         if(message.reply_id){
             const el = document.querySelector(`[data-message_id='${message.reply_id}']`);
-            console.log(message);
             if(!el) return;
 
             const reply_div = document.createElement("div");
