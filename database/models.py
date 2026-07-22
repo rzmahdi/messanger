@@ -56,6 +56,8 @@ class Message(Base):
     room_id = Column(Integer, ForeignKey("rooms.id", ondelete="CASCADE"), nullable=False)
     created_at = Column(DateTime, default=datetime.now, nullable=False)
     is_edited = Column(Boolean, default=False, nullable=False)
+    reply_id = Column(Integer, ForeignKey("messages.id"), nullable=True)
 
     user = relationship("User", back_populates="messages")
     room = relationship("Room", back_populates="messages")
+    reply = relationship("Message", remote_side=[id])
