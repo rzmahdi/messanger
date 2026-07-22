@@ -254,6 +254,9 @@ function addMessage(message, prepend = false){
             el.scrollIntoView({ behavior: "smooth", block: "center" });
             el.classList.add("highlight");
             setTimeout(() => {
+                hideContextBox();
+            }, 1);
+            setTimeout(() => {
                 el.classList.remove("highlight");
             }, 1000);
         })
