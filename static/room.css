@@ -99,7 +99,7 @@ body{
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 5px;
-    padding: 2px;
+    padding: 4px;
     color: rgb(230, 230, 230);
     position: relative;
 
@@ -681,7 +681,7 @@ div.edit-room-name-box{
     #messages .message{
         max-width: 85%;
         min-width: 30%;
-        padding: 1px;
+        padding: 2px;
     }
 
     #messages .message div p {
