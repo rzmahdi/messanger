@@ -302,10 +302,10 @@ function addMessage(message, prepend = false){
     div.addEventListener("click", (e)=>{
         if(div.classList.contains("me")){
             e.stopPropagation();
-            const message = e.target.closest(".message");
-            if(!message) return;
+            const message_element = e.target.closest(".message");
+            if(!message_element) return;
 
-            selected_message_id = message.dataset.message_id;
+            selected_message_id = message_element.dataset.message_id;
             hideRoomContextBox();
             showContextBox(e.clientX, e.clientY);
         }
