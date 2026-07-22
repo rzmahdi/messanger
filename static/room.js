@@ -324,6 +324,7 @@ function sendMessage(){
             content: message,
             reply_id: selected_message_id
         }));
+        message_input.value = "";
         return;
     }
 
@@ -679,6 +680,7 @@ message_input.addEventListener("keydown", (e)=>{
             hideReplyBox();
             sendMessage();
             is_replied = false;
+            message_input.value = "";
         }else{
             sendMessage();
         }
