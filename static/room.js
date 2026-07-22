@@ -206,6 +206,8 @@ function addMessage(message, prepend = false){
 
     const div = document.createElement("div");
     div.className = "message";
+    div.dataset.message_id = message.id;
+
 
     div.innerHTML = `
         <div>
