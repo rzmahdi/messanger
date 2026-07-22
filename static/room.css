@@ -80,6 +80,16 @@ body{
     gap: .5rem;
 }
 
+#messages .message-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#messages .message-container.me{
+    justify-content: flex-end;
+}
+
 #messages .message{
     min-width: 10%;
     max-width: 70%;
