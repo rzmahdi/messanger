@@ -51,6 +51,7 @@ const username_colors = [
 let oldest_message_id = null;
 let selected_message_id = null;
 let is_editing = null;
+let is_replied = null;
 
 chat_title_element.textContent = room_name;
 
@@ -238,6 +239,7 @@ function addMessage(message, prepend = false){
     }
 
     message_container.addEventListener("dblclick", (e)=>{
+        selected_message_id = message.dataset.message_id;
         e.preventDefault();
         showReplyBox();
         hideEditBox();
@@ -279,6 +281,13 @@ function sendMessage(){
     if(!isSocketReady()){
         console.warn("Socket not ready yet, message not sent.");
         return;
+    }
+
+    if(is_replied){
+        socket.send(JSON.stringify({
+            content: message,
+            reply_id: selected_message_id
+        }));
     }
 
     socket.send(JSON.stringify({
@@ -464,12 +473,14 @@ function hideEditBox(){
 }
 
 function showReplyBox(){
+    is_replied = true;
     reply_box.classList.remove("disable");
     setTimeout(() => {
         reply_box.classList.add("show");
     }, 10);
 }
 function hidereplyBox(){
+    is_replied = false;
     reply_box.classList.remove("show");
     setTimeout(() => {
         reply_box.classList.add("disable");
@@ -630,6 +641,9 @@ message_input.addEventListener("keydown", (e)=>{
         if(is_editing){
             hideEditBox();
             editMessage();
+        }else if(is_replied){
+            hidereplyBox();
+            sendMessage();
         }else{
             sendMessage();
         }
