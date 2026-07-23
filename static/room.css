@@ -1,9 +1,21 @@
-@keyframes highlight-flash{
+@keyframes highlight-flash-container{
     0%{
         background-color: none;
     }
     20%{
         background-color: rgba(0, 128, 128, 0.3);
+    }
+    100%{
+        background-color: none;
+    }
+}
+
+@keyframes highlight-flash-message{
+    0%{
+        background-color: none;
+    }
+    20%{
+        background-color: rgb(0, 88, 88);
     }
     100%{
         background-color: none;
@@ -125,9 +137,11 @@ body{
     box-shadow: 5px 5px 5px rgb(0, 0, 0, .3);
 }
 
-#messages .message-container.highlight,
+#messages .message-container.highlight{
+    animation: highlight-flash-container 1s ease;
+}
 #messages .message-container.highlight .message{
-    animation: highlight-flash 1s ease;
+    animation: highlight-flash-message 1s ease;
 }
 
 
