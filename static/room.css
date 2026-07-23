@@ -723,4 +723,12 @@ div.edit-room-name-box{
     #chat-title-container{
         width: 95%;
     }
+
+    #message-context-box{
+        width: 100px;
+    }
+
+    #room-context-box{
+        width: 100px;
+    }
 }
