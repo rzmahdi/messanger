@@ -83,10 +83,33 @@ header{
     margin: 10rem 0 1rem 0;
 }
 
+#search-btn{
+    background-color: rgb(255, 255, 255, .1);
+    color: white;
+
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+    transition: .1s ease;
+    cursor: pointer;
+}
+#search-btn:hover{
+    background-color: rgb(255, 255, 255, .15);
+}
+#search-btn:active{
+    background-color: rgb(255, 255, 255, .2);
+    scale: .98;
+}
+
+
 #search-room-input{
-    width: 90%;
+    width: 0%;
     height: 100%;
-    padding: 0 1rem;
+    padding: 0px;
 
     background-color: rgb(255, 255, 255, .1);
     color: white;
@@ -98,11 +121,18 @@ header{
     border-radius: 7px;
     outline: none;
 
+    transition: .4s ease;
+}
+#search-room-input.show{
+    width: 85%;
+    padding: 10px;
 }
 
 #create-room-btn{
     background-color: rgb(255, 255, 255, .1);
     color: white;
+
+    width: 70px;
 
     padding: 6px;
 
