@@ -16,6 +16,7 @@ const close_notif_btn = document.getElementById("modal-notif-close-btn");
 const token = localStorage.getItem("access_token");
 
 let selected_room_id = null;
+let is_room_created = null;
 
 
 function redirect_to_login(){
@@ -136,9 +137,10 @@ create_room_btn.addEventListener("click", async (e)=>{
         redirect_to_login();
     }
 
-    room_name = search_room_input.value;
+    room_name = create_room_input.value;
     if(!room_name){
         show_notif("chanell name can not be empty❌");
+        is_room_created = false;
         return
     }
 
@@ -154,11 +156,14 @@ create_room_btn.addEventListener("click", async (e)=>{
     })
 
     if(create_room_response.ok){
+        is_room_created = true;
+        room_name = create_room_input.value;
+        search_room_input.value = room_name;
         show_notif("Room Created✅");
-        room_name = search_room_input.value;
         clearRooms();
         display_rooms(room_name);
     }else if(create_room_response.status === 409){
+        is_room_created = false;
         show_notif("Room already exists!❌");
     }
 
