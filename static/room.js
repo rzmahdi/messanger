@@ -244,7 +244,9 @@ function addMessage(message, prepend = false){
         reply_div.appendChild(reply_div_username);
         reply_div.appendChild(reply_div_text);
 
-        reply_div.addEventListener("click", ()=>{
+        reply_div.addEventListener("click", (e)=>{
+            e.stopPropagation();
+            hideContextBox();
             const target_el = document.querySelector(`[data-message_id='${message.reply_id}']`);
             
             if(!target_el){
