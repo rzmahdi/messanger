@@ -43,8 +43,9 @@ async def handle_reply_message(data: dict, room_id: int, current_user, db):
             "user": {"username": current_user.username},
             "reply": {
                 "id": replied_user.id,
+                "content": new_message.reply.content,
                 "user": {
-                    "username": replied_user.username
+                    "username": replied_user.username,
                 }
             }
         },
