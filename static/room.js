@@ -207,6 +207,23 @@ function setUsernameVisibility(message_container_el, visible){
     b.style.display = visible ? "" : "none";
 }
 
+function applyUsernameGrouping(message_container_el){
+    if(!message_container_el) return;
+    const username = message_container_el.dataset.username;
+
+    const prev = message_container_el.previousElementSibling;
+    if(prev && prev.dataset.username === username){
+        setUsernameVisibility(message_container_el, false);
+    }else{
+        setUsernameVisibility(message_container_el, true);
+    }
+
+    const next = message_container_el.nextElementSibling;
+    if(next && next.dataset.username === username){
+        setUsernameVisibility(next, false);
+    }
+}
+
 function addMessage(message, prepend = false){
     const container = document.getElementById("messages");
 
