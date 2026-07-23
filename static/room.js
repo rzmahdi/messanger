@@ -517,28 +517,27 @@ function editMessage(){
 }
 
 
-function showRoomContextBox(x, y){
-    room_context_box.className = "show";
-    room_context_box.style.left = `${x}px`;
-    room_context_box.style.top = `${y}px`;
+function showRoomContextBox(){
+    const action_button_rect = room_action_button.getBoundingClientRect();
+    const room_context_rect = room_context_box.getBoundingClientRect();
 
-    const room_context_box_rect = room_context_box.getBoundingClientRect();
+    let x = action_button_rect.right;
+    let y = action_button_rect.bottom+5;
+
     const device_width = window.innerWidth;
     const device_height = window.innerHeight;
 
-    let final_x = x;
-    let final_y = y;
-
-    if(room_context_box_rect.right >= device_width){
-        final_x = room_context_box_rect.left - room_context_box_rect.width;
+    if(device_width > 768){
+        x = x - room_context_rect.width;
     }
 
-    if(room_context_box_rect.bottom > device_height){
-        final_y = room_context_box_rect.top - room_context_box_rect.height;
+    if(x+action_button_rect.width >= device_width){
+        x = device_width - 110;
     }
 
-    room_context_box.style.left = `${final_x}px`;
-    room_context_box.style.top = `${final_y}px`;
+    room_context_box.classList.toggle("show");
+    room_context_box.style.left = `${x}px`;
+    room_context_box.style.top = `${y}px`;
 }
 
 function hideRoomContextBox(){
@@ -732,7 +731,7 @@ room_action_button.addEventListener("click", (e)=>{
     e.preventDefault();
     e.stopPropagation();
     hideContextBox();
-    showRoomContextBox(e.clientX, e.clientY);
+    showRoomContextBox();
 });
 
 go_to_bottom_btn.addEventListener("click", scrollToBottom);
