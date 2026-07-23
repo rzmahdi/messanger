@@ -172,11 +172,18 @@ create_room_btn.addEventListener("click", async (e)=>{
 
 close_notif_btn.addEventListener("click", (e)=>{
     close_notif();
+
+    if(is_room_created){
+        hide_create_room_modal();
+    }
 });
 
 notif_modal.addEventListener("click", (e)=>{
     if(e.target === notif_modal){
         close_notif();
+        if(is_room_created){
+            hide_create_room_modal();
+    }
     }
 })
 
