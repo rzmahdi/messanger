@@ -221,9 +221,8 @@ function addMessage(message, prepend = false){
     `;
 
     if(message.reply_id){
-        const el = document.querySelector(`[data-message_id='${message.reply_id}']`);
-        const color =  getUserColor(message.reply.user.username);
-        if(!el) return;
+        console.log(message);
+        const color = getUserColor(message.reply.user.username);
 
         const reply_div = document.createElement("div");
         const reply_div_username = document.createElement("p");
@@ -237,30 +236,33 @@ function addMessage(message, prepend = false){
         reply_div_username.style.color = color;
 
         if(div.classList.contains("me"))
-            reply_div.style.background = color+"25";
-        
+            reply_div.style.background = color + "25";
+
         reply_div.style.borderColor = color;
 
-
-        reply_div_text.textContent = 
-            document.querySelector(`.message[data-message_id='${message.reply_id}']
-            p:not([class])`).textContent;
-
+        reply_div_text.textContent = message.reply.content;
         reply_div_text.dir = "auto";
 
         reply_div.appendChild(reply_div_username);
         reply_div.appendChild(reply_div_text);
 
         reply_div.addEventListener("click", ()=>{
-            el.scrollIntoView({ behavior: "smooth", block: "center" });
-            el.classList.add("highlight");
+            const target_el = document.querySelector(`[data-message_id='${message.reply_id}']`);
+            
+            if(!target_el){
+                console.warn("Original message not found in DOM (may need to load older messages)");
+                return;
+            }
+
+            target_el.scrollIntoView({ behavior: "smooth", block: "center" });
+            target_el.classList.add("highlight");
             setTimeout(() => {
                 hideContextBox();
             }, 1);
             setTimeout(() => {
-                el.classList.remove("highlight");
+                target_el.classList.remove("highlight");
             }, 1000);
-        })
+        });
 
         div.firstElementChild.prepend(reply_div);
     }
