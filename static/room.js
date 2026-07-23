@@ -254,9 +254,7 @@ function addMessage(message, prepend = false){
 
             target_el.scrollIntoView({ behavior: "smooth", block: "center" });
             target_el.classList.add("highlight");
-            setTimeout(() => {
-                hideContextBox();
-            }, 1);
+
             setTimeout(() => {
                 target_el.classList.remove("highlight");
             }, 1000);
@@ -299,15 +297,25 @@ function addMessage(message, prepend = false){
     });
 
 
+    let click_timer = null;
     div.addEventListener("click", (e)=>{
         if(div.classList.contains("me")){
             e.stopPropagation();
             const message_element = e.target.closest(".message");
             if(!message_element) return;
 
-            selected_message_id = message_element.dataset.message_id;
-            hideRoomContextBox();
-            showContextBox(e.clientX, e.clientY);
+            if(click_timer){
+                clearTimeout(click_timer);
+                click_timer = null;
+                return;
+            }
+
+            click_timer = setTimeout(() => {
+                selected_message_id = message_element.dataset.message_id;
+                hideRoomContextBox();
+                showContextBox(e.clientX, e.clientY);
+                click_timer = null;
+            }, 250);
         }
     });
 
