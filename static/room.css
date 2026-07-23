@@ -708,6 +708,11 @@ div.edit-room-name-box{
     #messages .message.me p {
         margin: 2px;
         margin-bottom: 0;
+        pointer-events: none;
+    }
+
+    #messages .message span {
+        pointer-events: none;
     }
 
     #messages .message div b {
