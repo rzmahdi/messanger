@@ -3,11 +3,11 @@ const rooms_container = document.getElementById("rooms-container");
 const logout_btn = document.getElementById("logout");
 const show_create_modal_room_btn = document.getElementById("create-room-btn");
 const search_room_input = document.getElementById("search-room-input");
+const search_btn = document.getElementById("search-btn");
 
 const create_room_btn = document.getElementById("confirm-create-room-btn");
 const create_room_input = document.getElementById("new-room-name-input");
 const create_room_modal = document.getElementById("create-room-modal");
-
 
 const notif_modal = document.getElementById("modal-overlay-notif");
 const notif_text = document.getElementById("notif-modal-text");
@@ -26,6 +26,10 @@ function redirect_to_login(){
 function show_notif(text){
     notif_modal.classList.add("show");
     notif_text.innerHTML = text;
+}
+
+function toggle_search_input(){
+    search_room_input.classList.toggle("show");
 }
 
 function close_notif(){
@@ -192,6 +196,8 @@ create_room_modal.addEventListener("click", (e)=>{
         hide_create_room_modal();
     }
 })
+
+search_btn.addEventListener("click", toggle_search_input);
 
 checkLogin();
 display_rooms();
