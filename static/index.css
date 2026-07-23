@@ -175,7 +175,8 @@ header{
     background:rgba(255,255,255,.14);
 }
 
-#modal-overlay-notif{
+#modal-overlay-notif,
+#create-room-modal{
     display: none;
     position: fixed;
     top: 0;
@@ -187,11 +188,13 @@ header{
     backdrop-filter: blur(5px);
 }
 
-#modal-overlay-notif.show{
+#modal-overlay-notif.show,
+#create-room-modal.show{
     display: block;
 }
 
-div.modal-notif-box{
+div.modal-notif-box,
+.modal-box{
     background-image: linear-gradient(to bottom right, rgba(0, 128, 128, 0.2), rgba(0, 128, 128, 0.4));
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: .7rem;
@@ -208,6 +211,13 @@ div.modal-notif-box{
     justify-content: space-between;
 }
 
+.modal-box{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
 div.modal-notif-box button{
     background-color: rgba(255, 255, 255, 0.356);
     width: 30px;
@@ -222,4 +232,52 @@ div.modal-notif-box span{
     width: 85%;
     font-size: large;
     font-weight: bold;
+}
+
+#new-room-name-input{
+    width: 90%;
+    height: 40px;
+    padding: 0 1rem;
+
+    background-color: rgb(255, 255, 255, .1);
+    color: white;
+
+    font-size: large;
+
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+    outline: none;
+}
+#new-room-name-input::placeholder{
+    transition: all .2s ease;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#new-room-name-input:focus::placeholder{
+    font-size: small;
+    transform: translate(0, -15px);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#confirm-create-room-btn{
+    width: 90%;
+    height: 35px;
+
+    background-color: teal;
+    color: white;
+
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+    outline: none;
+
+    transition: all .2s ease;
+}
+#confirm-create-room-btn:hover{
+    background-color: rgba(29, 182, 182, 0.705);
+}
+#confirm-create-room-btn:active{
+    scale: .98;
+    background-color: rgba(29, 182, 182, 0.9);
 }
