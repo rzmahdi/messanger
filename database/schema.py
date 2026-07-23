@@ -45,6 +45,7 @@ class RoomEditSchema(BaseModel):
 class ReplyPreviewSchema(BaseModel):
     id: int
     user: UserBaseSchema
+    content: str
 
     class Config:
         from_attributes = True
