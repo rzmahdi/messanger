@@ -664,9 +664,12 @@ function deleteMessageInDOM(message_id){
     const el = document.querySelector(`[data-message_id='${message_id}']`);
     if(!el) return;
 
+    const next = el.nextElementSibling;
+
     el.classList.add("remove");
     setTimeout(() => {
         el.remove();
+        applyUsernameGrouping(next);
     }, 210);
 }
 
