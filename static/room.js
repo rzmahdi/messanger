@@ -201,6 +201,12 @@ async function loadMessages(){
     scrollToBottom();
 }
 
+function setUsernameVisibility(message_container_el, visible){
+    const b = message_container_el.querySelector(".message-username");
+    if(!b) return;
+    b.style.display = visible ? "" : "none";
+}
+
 function addMessage(message, prepend = false){
     const container = document.getElementById("messages");
 
