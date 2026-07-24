@@ -78,7 +78,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: .8rem;
+    gap: 5px;
 
     margin: 10rem 0 1rem 0;
 }
@@ -122,6 +122,15 @@ header{
     outline: none;
 
     transition: .4s ease;
+}
+#search-room-input::placeholder {
+    transition: .2s ease;
+    color: rgb(201, 201, 201);
+}
+#search-room-input:focus::placeholder {
+    color: rgb(163, 163, 163);
+    font-size: small;
+    transform: translate(0, -10px);
 }
 #search-room-input.show{
     width: 85%;
@@ -313,4 +322,18 @@ div.modal-notif-box span{
 #confirm-create-room-btn:active{
     scale: .98;
     background-color: rgba(29, 182, 182, 0.9);
+}
+
+@media (max-width: 768px) {
+    #search-room-input.show {
+        width: 80%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+    #search-room-input.show {
+        width: 70%;
+        padding: 10px;
+    }
 }
