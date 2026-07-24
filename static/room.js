@@ -28,6 +28,7 @@ const close_reply_box_btn = document.getElementById("reply-box-close-btn");
 const reply_username_placeholder = document.getElementById("reply-username-placeholder");
 const replied_message_content_placeholder = document.getElementById("replied-message");
 
+const user_device_width = window.innerWidth;
 
 const user_status_container = document.getElementById("user-status-container");
 const online_container = document.getElementById("online-container");
@@ -739,7 +740,7 @@ go_to_bottom_btn.addEventListener("click", scrollToBottom);
 send_message_btn.addEventListener("click", sendMessage);
 
 message_input.addEventListener("keydown", (e)=>{
-    if(e.key === "Enter" && !e.shiftKey){
+    if(e.key === "Enter" && !e.shiftKey && user_device_width > 768){
         e.preventDefault();
         if(is_editing){
             hideEditBox();
